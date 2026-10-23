@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { CarrinhoProviderPLG } from '../context/CarrinhoPLG';
-import { corPLG } from '../constants/temaPLG';
+import * as SplashScreen from 'expo-splash-screen';
+import { useFonts, Sora_400Regular, Sora_500Medium, Sora_600SemiBold } from '@expo-google-fonts/sora';
+import { LojaProviderPLG } from '../context/LojaPLG';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [fontesCarregadasPLG] = useFonts({ Sora_400Regular, Sora_500Medium, Sora_600SemiBold });
+
+  useEffect(() => {
+    if (fontesCarregadasPLG) SplashScreen.hideAsync();
+  }, [fontesCarregadasPLG]);
+
+  if (!fontesCarregadasPLG) return null;
+
   return (
-    <CarrinhoProviderPLG>
-      <StatusBar style="auto" />
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: corPLG.primariaPLG },
-          headerTintColor: corPLG.brancoPLG,
-          headerTitleStyle: { fontWeight: '700' },
-          contentStyle: { backgroundColor: corPLG.fundoPLG },
-        }}
-      >
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="produto/[id]" options={{ title: 'Detalhes do Produto' }} />
+    <LojaProviderPLG>
+      <Stack screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="login" />
+        <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
+        <Stack.Screen name="produto/[id]" />
       </Stack>
-    </CarrinhoProviderPLG>
+    </LojaProviderPLG>
   );
 }

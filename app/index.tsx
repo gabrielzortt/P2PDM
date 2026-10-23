@@ -1,98 +1,49 @@
-import React, { useState } from 'react';
-import {
-  View, Text, TextInput, TouchableOpacity, StyleSheet,
-  KeyboardAvoidingView, Platform, ScrollView,
-} from 'react-native';
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
-import { corPLG } from '../constants/temaPLG';
+import { corPLG, fontePLG } from '../constants/temaPLG';
 
-const emailCadastradoPLG: string = 'colecionador@moedas.com';
-const senhaCadastradaPLG: string = '123456';
-
-export default function LoginPLG() {
+export default function BoasVindasPLG() {
   const roteadorPLG = useRouter();
-  const [emailPLG, setEmailPLG] = useState<string>('');
-  const [senhaPLG, setSenhaPLG] = useState<string>('');
-  const [mensagemErroPLG, setMensagemErroPLG] = useState<string>('');
-
-  const verificarLoginPLG = () => {
-    const emailLimpoPLG = emailPLG.trim();
-    if (emailLimpoPLG === '' || senhaPLG === '') {
-      setMensagemErroPLG('Preencha o e-mail e a senha para continuar.');
-      return;
-    }
-    if (emailLimpoPLG.toLowerCase() !== emailCadastradoPLG) {
-      setMensagemErroPLG('E-mail incorreto. Verifique e tente novamente.');
-      return;
-    }
-    if (senhaPLG !== senhaCadastradaPLG) {
-      setMensagemErroPLG('Senha incorreta. Tente novamente.');
-      return;
-    }
-    setMensagemErroPLG('');
-    roteadorPLG.replace('/home');
-  };
+  const { height: alturaPLG } = useWindowDimensions();
 
   return (
-    <KeyboardAvoidingView style={estilosPLG.telaPLG} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ScrollView contentContainerStyle={estilosPLG.conteudoPLG} keyboardShouldPersistTaps="handled">
-        <View style={estilosPLG.logoPLG}>
-          <Text style={estilosPLG.logoSimboloPLG}>$</Text>
+    <View style={estilosPLG.telaPLG}>
+      <StatusBar style="light" />
+      <Image
+        source={require('../assets/images/hero_onboarding.jpg')}
+        style={[estilosPLG.imagemPLG, { height: alturaPLG * 0.64 }]}
+        resizeMode="cover"
+      />
+      <View style={estilosPLG.conteudoPLG}>
+        <Text style={estilosPLG.tituloPLG}>Hora de colecionar história....</Text>
+        <Text style={estilosPLG.textoPLG}>
+          Moedas e cédulas raras entregues na sua porta. Comece a sua coleção agora!
+        </Text>
+        <View style={estilosPLG.pontosPLG}>
+          <View style={estilosPLG.pontoPLG} />
+          <View style={estilosPLG.pontoPLG} />
+          <View style={estilosPLG.pontoPLG} />
+          <View style={estilosPLG.pontoAtivoPLG} />
         </View>
-        <Text style={estilosPLG.tituloPLG}>Numismática PLG</Text>
-        <Text style={estilosPLG.subtituloPLG}>Moedas e cédulas antigas para colecionadores</Text>
-
-        <View style={estilosPLG.formularioPLG}>
-          <Text style={estilosPLG.rotuloPLG}>E-mail</Text>
-          <TextInput
-            style={estilosPLG.campoPLG}
-            placeholder="seu@email.com"
-            placeholderTextColor={corPLG.textoSuavePLG}
-            value={emailPLG}
-            onChangeText={setEmailPLG}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-          <Text style={estilosPLG.rotuloPLG}>Senha</Text>
-          <TextInput
-            style={estilosPLG.campoPLG}
-            placeholder="••••••"
-            placeholderTextColor={corPLG.textoSuavePLG}
-            value={senhaPLG}
-            onChangeText={setSenhaPLG}
-            secureTextEntry
-            onSubmitEditing={verificarLoginPLG}
-          />
-          {mensagemErroPLG !== '' && <Text style={estilosPLG.erroPLG}>{mensagemErroPLG}</Text>}
-          <TouchableOpacity style={estilosPLG.botaoPLG} activeOpacity={0.85} onPress={verificarLoginPLG}>
-            <Text style={estilosPLG.botaoTextoPLG}>Entrar</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={estilosPLG.dicaPLG}>Demo: {emailCadastradoPLG} / {senhaCadastradaPLG}</Text>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <TouchableOpacity style={estilosPLG.botaoPLG} activeOpacity={0.85} onPress={() => roteadorPLG.push('/login')}>
+          <Text style={estilosPLG.botaoTextoPLG}>Get Started</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
 const estilosPLG = StyleSheet.create({
-  telaPLG: { flex: 1, backgroundColor: corPLG.primariaPLG },
-  conteudoPLG: { flexGrow: 1, justifyContent: 'center', padding: 24 },
-  logoPLG: {
-    alignSelf: 'center', width: 84, height: 84, borderRadius: 42,
-    backgroundColor: corPLG.douradoPLG, alignItems: 'center', justifyContent: 'center', marginBottom: 16,
-  },
-  logoSimboloPLG: { fontSize: 44, fontWeight: '800', color: corPLG.primariaPLG },
-  tituloPLG: { fontSize: 28, fontWeight: '800', color: corPLG.brancoPLG, textAlign: 'center' },
-  subtituloPLG: { fontSize: 14, color: corPLG.douradoClaroPLG, textAlign: 'center', marginBottom: 28, marginTop: 4 },
-  formularioPLG: { backgroundColor: corPLG.fundoPLG, borderRadius: 20, padding: 20 },
-  rotuloPLG: { fontSize: 13, fontWeight: '700', color: corPLG.textoPLG, marginBottom: 6, marginTop: 8 },
-  campoPLG: {
-    backgroundColor: corPLG.brancoPLG, borderWidth: 1, borderColor: corPLG.bordaPLG,
-    borderRadius: 12, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: corPLG.textoPLG,
-  },
-  erroPLG: { color: corPLG.erroPLG, fontSize: 13, marginTop: 12, fontWeight: '600' },
-  botaoPLG: { backgroundColor: corPLG.primariaPLG, borderRadius: 12, paddingVertical: 14, alignItems: 'center', marginTop: 20 },
-  botaoTextoPLG: { color: corPLG.brancoPLG, fontSize: 16, fontWeight: '700' },
-  dicaPLG: { color: corPLG.douradoClaroPLG, textAlign: 'center', fontSize: 12, marginTop: 20 },
+  telaPLG: { flex: 1, backgroundColor: corPLG.marromPLG },
+  imagemPLG: { width: '100%' },
+  conteudoPLG: { flex: 1, paddingHorizontal: 30, paddingTop: 28, paddingBottom: 28 },
+  tituloPLG: { fontSize: 26, fontFamily: fontePLG.semiPLG, color: corPLG.brancoPLG },
+  textoPLG: { fontSize: 16, lineHeight: 23, fontFamily: fontePLG.regularPLG, color: '#E9E1DC', marginTop: 14 },
+  pontosPLG: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: 'auto', marginBottom: 22 },
+  pontoPLG: { width: 7, height: 7, borderRadius: 4, backgroundColor: corPLG.brancoPLG },
+  pontoAtivoPLG: { width: 26, height: 7, borderRadius: 4, backgroundColor: corPLG.brancoPLG },
+  botaoPLG: { height: 54, borderRadius: 27, backgroundColor: corPLG.laranjaPLG, alignItems: 'center', justifyContent: 'center' },
+  botaoTextoPLG: { fontSize: 16, fontFamily: fontePLG.semiPLG, color: corPLG.brancoPLG },
 });

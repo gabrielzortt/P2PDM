@@ -1,69 +1,73 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Pressable, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { ProdutoPLG, formatarPrecoPLG } from '../data/produtosPLG';
-import { corPLG } from '../constants/temaPLG';
+import { corPLG, fontePLG } from '../constants/temaPLG';
 
 interface ProductCardPropsPLG {
   produtoPLG: ProdutoPLG;
-  aoVerDetalhesPLG: (idPLG: string) => void;
+  aoAbrirPLG: (idPLG: string) => void;
+  aoAdicionarPLG: (produtoPLG: ProdutoPLG) => void;
 }
 
-export default function ProductCard({ produtoPLG, aoVerDetalhesPLG }: ProductCardPropsPLG) {
+export default function ProductCard({ produtoPLG, aoAbrirPLG, aoAdicionarPLG }: ProductCardPropsPLG) {
   return (
-    <View style={estilosPLG.cartaoPLG}>
-      <Image source={produtoPLG.imagemPLG} style={estilosPLG.imagemPLG} resizeMode="cover" />
-      <View style={estilosPLG.etiquetaPLG}>
-        <Text style={estilosPLG.etiquetaTextoPLG}>{produtoPLG.categoriaPLG}</Text>
+    <Pressable style={estilosPLG.cartaoPLG} onPress={() => aoAbrirPLG(produtoPLG.idPLG)}>
+      <View>
+        <Image source={produtoPLG.imagemCardPLG} style={estilosPLG.imagemPLG} resizeMode="cover" />
+        <View style={estilosPLG.notaPLG}>
+          <Ionicons name="star" size={11} color={corPLG.estrelaPLG} />
+          <Text style={estilosPLG.notaTextoPLG}>{produtoPLG.notaPLG.toFixed(1)}</Text>
+        </View>
       </View>
-      <View style={estilosPLG.infoPLG}>
-        <Text style={estilosPLG.nomePLG} numberOfLines={2}>{produtoPLG.nomePLG}</Text>
+      <Text style={estilosPLG.nomePLG} numberOfLines={1}>{produtoPLG.nomePLG}</Text>
+      <Text style={estilosPLG.subtituloPLG} numberOfLines={1}>{produtoPLG.subtituloPLG}</Text>
+      <View style={estilosPLG.rodapePLG}>
         <Text style={estilosPLG.precoPLG}>{formatarPrecoPLG(produtoPLG.precoPLG)}</Text>
         <TouchableOpacity
           style={estilosPLG.botaoPLG}
           activeOpacity={0.85}
-          onPress={() => aoVerDetalhesPLG(produtoPLG.idPLG)}
+          onPress={() => aoAdicionarPLG(produtoPLG)}
+          accessibilityLabel={`Adicionar ${produtoPLG.nomePLG} ao carrinho`}
         >
-          <Text style={estilosPLG.botaoTextoPLG}>Detalhes</Text>
+          <Ionicons name="add" size={20} color={corPLG.brancoPLG} />
         </TouchableOpacity>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
 const estilosPLG = StyleSheet.create({
   cartaoPLG: {
     flex: 1,
-    margin: 6,
     backgroundColor: corPLG.brancoPLG,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: corPLG.bordaPLG,
-    overflow: 'hidden',
-    elevation: 2,
+    borderRadius: 18,
+    padding: 8,
+    paddingBottom: 12,
     shadowColor: '#000',
     shadowOpacity: 0.06,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
   },
-  imagemPLG: { width: '100%', aspectRatio: 1 },
-  etiquetaPLG: {
+  imagemPLG: { width: '100%', aspectRatio: 1.1, borderRadius: 14 },
+  notaPLG: {
     position: 'absolute',
-    top: 8,
-    left: 8,
-    backgroundColor: corPLG.primariaPLG,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 20,
-  },
-  etiquetaTextoPLG: { color: corPLG.douradoClaroPLG, fontSize: 11, fontWeight: '700' },
-  infoPLG: { padding: 12 },
-  nomePLG: { fontSize: 14, fontWeight: '700', color: corPLG.textoPLG, minHeight: 38 },
-  precoPLG: { fontSize: 16, fontWeight: '800', color: corPLG.douradoPLG, marginVertical: 6 },
-  botaoPLG: {
-    backgroundColor: corPLG.primariaPLG,
-    paddingVertical: 10,
-    borderRadius: 10,
+    top: 0,
+    left: 0,
+    flexDirection: 'row',
     alignItems: 'center',
+    gap: 3,
+    backgroundColor: 'rgba(0,0,0,0.38)',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderTopLeftRadius: 14,
+    borderBottomRightRadius: 14,
   },
-  botaoTextoPLG: { color: corPLG.brancoPLG, fontWeight: '700', fontSize: 13 },
+  notaTextoPLG: { color: corPLG.brancoPLG, fontSize: 11, fontFamily: fontePLG.semiPLG },
+  nomePLG: { fontSize: 16, fontFamily: fontePLG.semiPLG, color: corPLG.textoPLG, marginTop: 10, marginHorizontal: 4 },
+  subtituloPLG: { fontSize: 12, fontFamily: fontePLG.regularPLG, color: corPLG.suavePLG, marginTop: 2, marginHorizontal: 4 },
+  rodapePLG: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10, marginHorizontal: 4 },
+  precoPLG: { fontSize: 15, fontFamily: fontePLG.semiPLG, color: corPLG.precoPLG },
+  botaoPLG: { width: 32, height: 32, borderRadius: 10, backgroundColor: corPLG.cobrePLG, alignItems: 'center', justifyContent: 'center' },
 });

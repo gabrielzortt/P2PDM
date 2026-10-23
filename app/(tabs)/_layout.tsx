@@ -2,39 +2,34 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { corPLG } from '../../constants/temaPLG';
-import { useCarrinhoPLG } from '../../context/CarrinhoPLG';
+import { useLojaPLG } from '../../context/LojaPLG';
 
 export default function TabsLayoutPLG() {
-  const { itensPLG } = useCarrinhoPLG();
-  const quantidadeTotalPLG = itensPLG.reduce((somaPLG, i) => somaPLG + i.quantidadePLG, 0);
+  const { itensPLG } = useLojaPLG();
+  const quantidadePLG = itensPLG.reduce((somaPLG, i) => somaPLG + i.quantidadePLG, 0);
 
   return (
     <Tabs
       screenOptions={{
-        headerStyle: { backgroundColor: corPLG.primariaPLG },
-        headerTintColor: corPLG.brancoPLG,
-        tabBarActiveTintColor: corPLG.douradoPLG,
-        tabBarInactiveTintColor: corPLG.textoSuavePLG,
-        tabBarStyle: { backgroundColor: corPLG.brancoPLG, borderTopColor: corPLG.bordaPLG },
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: corPLG.laranjaPLG,
+        tabBarInactiveTintColor: corPLG.inativoPLG,
+        tabBarStyle: { backgroundColor: corPLG.brancoPLG, borderTopWidth: 0, height: 64, elevation: 12 },
+        tabBarItemStyle: { paddingVertical: 10 },
       }}
     >
-      <Tabs.Screen
-        name="home"
-        options={{ title: 'Home', tabBarIcon: ({ color, size }) => <Ionicons name="home" size={size} color={color} /> }}
-      />
+      <Tabs.Screen name="home" options={{ tabBarIcon: ({ color }) => <Ionicons name="home" size={26} color={color} /> }} />
+      <Tabs.Screen name="favoritos" options={{ tabBarIcon: ({ color }) => <Ionicons name="heart" size={26} color={color} /> }} />
       <Tabs.Screen
         name="carrinho"
         options={{
-          title: 'Carrinho',
-          tabBarBadge: quantidadeTotalPLG > 0 ? quantidadeTotalPLG : undefined,
-          tabBarBadgeStyle: { backgroundColor: corPLG.douradoPLG },
-          tabBarIcon: ({ color, size }) => <Ionicons name="cart" size={size} color={color} />,
+          tabBarBadge: quantidadePLG > 0 ? quantidadePLG : undefined,
+          tabBarBadgeStyle: { backgroundColor: corPLG.laranjaPLG },
+          tabBarIcon: ({ color }) => <Ionicons name="bag" size={26} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="perfil"
-        options={{ title: 'Perfil', tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} /> }}
-      />
+      <Tabs.Screen name="notificacoes" options={{ tabBarIcon: ({ color }) => <Ionicons name="notifications" size={26} color={color} /> }} />
     </Tabs>
   );
 }

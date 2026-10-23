@@ -1,11 +1,22 @@
 export const corPLG = {
-  fundoPLG: '#F6F1E7',
-  primariaPLG: '#1A2440',
-  douradoPLG: '#B8892D',
-  douradoClaroPLG: '#E9D7A8',
-  textoPLG: '#1E1E24',
-  textoSuavePLG: '#6B6B76',
+  marromPLG: '#3B261E',
+  laranjaPLG: '#E27D19',
+  cobrePLG: '#C67C4E',
+  cremePLG: '#FFF6F0',
+  escuroPLG: '#313131',
+  textoPLG: '#2F2D2C',
+  precoPLG: '#2F4B4E',
+  suavePLG: '#9B9B9B',
+  bordaPLG: '#E6E6E6',
   brancoPLG: '#FFFFFF',
-  erroPLG: '#B3261E',
-  bordaPLG: '#E3DAC6',
+  fundoPLG: '#F9F9F9',
+  erroPLG: '#FFB4A8',
+  estrelaPLG: '#FBBE21',
+  inativoPLG: '#A2A2A2',
+};
+
+export const fontePLG = {
+  regularPLG: 'Sora_400Regular',
+  mediaPLG: 'Sora_500Medium',
+  semiPLG: 'Sora_600SemiBold',
 };

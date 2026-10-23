@@ -6,12 +6,11 @@ import { ProdutoPLG } from '../data/produtosPLG';
 interface ProductListPropsPLG {
   produtosPLG: ProdutoPLG[];
   aoAbrirPLG: (idPLG: string) => void;
-  aoAdicionarPLG: (produtoPLG: ProdutoPLG) => void;
   cabecalhoPLG?: React.ReactElement;
   vazioPLG?: React.ReactElement;
 }
 
-export default function ProductList({ produtosPLG, aoAbrirPLG, aoAdicionarPLG, cabecalhoPLG, vazioPLG }: ProductListPropsPLG) {
+export default function ProductList({ produtosPLG, aoAbrirPLG, cabecalhoPLG, vazioPLG }: ProductListPropsPLG) {
   return (
     <FlatList
       data={produtosPLG}
@@ -25,7 +24,7 @@ export default function ProductList({ produtosPLG, aoAbrirPLG, aoAdicionarPLG, c
       keyboardShouldPersistTaps="handled"
       renderItem={({ item }) => (
         <View style={estilosPLG.celulaPLG}>
-          <ProductCard produtoPLG={item} aoAbrirPLG={aoAbrirPLG} aoAdicionarPLG={aoAdicionarPLG} />
+          <ProductCard produtoPLG={item} aoAbrirPLG={aoAbrirPLG} />
         </View>
       )}
     />
@@ -33,7 +32,7 @@ export default function ProductList({ produtosPLG, aoAbrirPLG, aoAdicionarPLG, c
 }
 
 const estilosPLG = StyleSheet.create({
-  listaPLG: { paddingHorizontal: 20, paddingBottom: 24 },
+  listaPLG: { paddingHorizontal: 20, paddingBottom: 28 },
   colunasPLG: { gap: 16, marginBottom: 16 },
   celulaPLG: { flex: 1 },
 });

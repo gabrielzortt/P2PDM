@@ -29,9 +29,9 @@ export default function CategoriaChips({ opcoesPLG, selecionadaPLG, aoSelecionar
 }
 
 const estilosPLG = StyleSheet.create({
-  linhaPLG: { paddingHorizontal: 20, paddingVertical: 20, gap: 12 },
-  chipPLG: { paddingHorizontal: 16, paddingVertical: 9, borderRadius: 10 },
-  chipAtivoPLG: { backgroundColor: corPLG.cobrePLG },
-  textoPLG: { fontSize: 14, fontFamily: fontePLG.regularPLG, color: corPLG.textoPLG },
-  textoAtivoPLG: { color: corPLG.brancoPLG, fontFamily: fontePLG.semiPLG },
+  linhaPLG: { paddingHorizontal: 20, paddingVertical: 16, gap: 10 },
+  chipPLG: { paddingHorizontal: 18, paddingVertical: 10, borderRadius: 14, backgroundColor: corPLG.brancoPLG, borderWidth: 1, borderColor: corPLG.bordaPLG },
+  chipAtivoPLG: { backgroundColor: corPLG.marromPLG, borderColor: corPLG.marromPLG },
+  textoPLG: { fontSize: 13, fontFamily: fontePLG.mediaPLG, color: corPLG.textoPLG },
+  textoAtivoPLG: { color: corPLG.ouroClaroPLG, fontFamily: fontePLG.semiPLG },
 });

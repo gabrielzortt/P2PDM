@@ -1,35 +1,48 @@
 import React from 'react';
-import { Tabs } from 'expo-router';
+import { Redirect, Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { corPLG } from '../../constants/temaPLG';
+import { corPLG, fontePLG } from '../../constants/temaPLG';
 import { useLojaPLG } from '../../context/LojaPLG';
 
 export default function TabsLayoutPLG() {
-  const { itensPLG } = useLojaPLG();
-  const quantidadePLG = itensPLG.reduce((somaPLG, i) => somaPLG + i.quantidadePLG, 0);
+  const { usuarioPLG, quantidadeTotalPLG, prontoPLG } = useLojaPLG();
+
+  if (prontoPLG && !usuarioPLG) return <Redirect href="/login" />;
 
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarShowLabel: false,
-        tabBarActiveTintColor: corPLG.laranjaPLG,
-        tabBarInactiveTintColor: corPLG.inativoPLG,
-        tabBarStyle: { backgroundColor: corPLG.brancoPLG, borderTopWidth: 0, height: 64, elevation: 12 },
-        tabBarItemStyle: { paddingVertical: 10 },
+        tabBarActiveTintColor: corPLG.ouroEscuroPLG,
+        tabBarInactiveTintColor: '#A99C93',
+        tabBarLabelStyle: { fontFamily: fontePLG.mediaPLG, fontSize: 11, marginTop: 2 },
+        tabBarStyle: {
+          backgroundColor: corPLG.brancoPLG,
+          borderTopWidth: 0,
+          height: 72,
+          paddingTop: 8,
+          paddingBottom: 10,
+          shadowColor: '#22140E',
+          shadowOpacity: 0.1,
+          shadowRadius: 18,
+          shadowOffset: { width: 0, height: -6 },
+          elevation: 16,
+        },
       }}
     >
-      <Tabs.Screen name="home" options={{ tabBarIcon: ({ color }) => <Ionicons name="home" size={26} color={color} /> }} />
-      <Tabs.Screen name="favoritos" options={{ tabBarIcon: ({ color }) => <Ionicons name="heart" size={26} color={color} /> }} />
+      <Tabs.Screen name="inicio" options={{ title: 'Início', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'home' : 'home-outline'} size={23} color={color} /> }} />
+      <Tabs.Screen name="explorar" options={{ title: 'Explorar', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'compass' : 'compass-outline'} size={24} color={color} /> }} />
+      <Tabs.Screen name="favoritos" options={{ title: 'Favoritos', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'heart' : 'heart-outline'} size={23} color={color} /> }} />
       <Tabs.Screen
         name="carrinho"
         options={{
-          tabBarBadge: quantidadePLG > 0 ? quantidadePLG : undefined,
-          tabBarBadgeStyle: { backgroundColor: corPLG.laranjaPLG },
-          tabBarIcon: ({ color }) => <Ionicons name="bag" size={26} color={color} />,
+          title: 'Carrinho',
+          tabBarBadge: quantidadeTotalPLG > 0 ? quantidadeTotalPLG : undefined,
+          tabBarBadgeStyle: { backgroundColor: corPLG.ouroPLG, color: corPLG.espressoPLG, fontFamily: fontePLG.semiPLG, fontSize: 10 },
+          tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'bag' : 'bag-outline'} size={23} color={color} />,
         }}
       />
-      <Tabs.Screen name="notificacoes" options={{ tabBarIcon: ({ color }) => <Ionicons name="notifications" size={26} color={color} /> }} />
+      <Tabs.Screen name="perfil" options={{ title: 'Perfil', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'person' : 'person-outline'} size={23} color={color} /> }} />
     </Tabs>
   );
 }

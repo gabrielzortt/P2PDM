@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Numismática PLG",
+    "slug": "loja-moedas-plg",
+    "version": "1.0.0",
+    "scheme": "lojamoedasplg",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": { "image": "./assets/images/splash-icon.png", "resizeMode": "contain", "backgroundColor": "#1A2440" },
+    "android": { "adaptiveIcon": { "foregroundImage": "./assets/images/adaptive-icon.png", "backgroundColor": "#1A2440" } },
+    "plugins": ["expo-router"]
+  }
+}

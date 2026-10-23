@@ -5,9 +5,12 @@ App React Native + Expo Router (Stack + Tabs), TSX e StyleSheet.
 ## Executar
 ```bash
 npm install
-npx expo install --fix
 npx expo start
 ```
+
+🌐 **Versão web:** https://gabrielzortt.github.io/P2PDM/
+
+[![Deploy](https://github.com/gabrielzortt/P2PDM/actions/workflows/deploy.yml/badge.svg)](https://github.com/gabrielzortt/P2PDM/actions/workflows/deploy.yml)
 
 Login de teste: `colecionador@moedas.com` / `123456`
 

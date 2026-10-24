@@ -101,9 +101,9 @@ export const filtrarPorChipPLG = (produtoPLG: ProdutoPLG, chipPLG: string): bool
 
 export const ordenarPLG = (listaPLG: ProdutoPLG[], ordemPLG: OrdemPLG): ProdutoPLG[] => {
   const copiaPLG = [...listaPLG];
-  if (ordemPLG === 'menor') return copiaPLG.sort((a, b) => a.precoPLG - b.precoPLG);
-  if (ordemPLG === 'maior') return copiaPLG.sort((a, b) => b.precoPLG - a.precoPLG);
-  if (ordemPLG === 'nota') return copiaPLG.sort((a, b) => b.notaPLG - a.notaPLG);
+  if (ordemPLG === 'menor') return copiaPLG.sort((aPLG, bPLG) => aPLG.precoPLG - bPLG.precoPLG);
+  if (ordemPLG === 'maior') return copiaPLG.sort((aPLG, bPLG) => bPLG.precoPLG - aPLG.precoPLG);
+  if (ordemPLG === 'nota') return copiaPLG.sort((aPLG, bPLG) => bPLG.notaPLG - aPLG.notaPLG);
   return copiaPLG;
 };
 

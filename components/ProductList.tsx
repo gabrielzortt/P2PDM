@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import ProductCard from './ProductCard';
+import ProductCardPLG from './ProductCard';
 import { ProdutoPLG } from '../data/produtosPLG';
 
 interface ProductListPropsPLG {
@@ -10,7 +10,7 @@ interface ProductListPropsPLG {
   vazioPLG?: React.ReactElement;
 }
 
-export default function ProductList({ produtosPLG, aoAbrirPLG, cabecalhoPLG, vazioPLG }: ProductListPropsPLG) {
+export default function ProductListPLG({ produtosPLG, aoAbrirPLG, cabecalhoPLG, vazioPLG }: ProductListPropsPLG) {
   return (
     <FlatList
       data={produtosPLG}
@@ -22,9 +22,9 @@ export default function ProductList({ produtosPLG, aoAbrirPLG, cabecalhoPLG, vaz
       contentContainerStyle={estilosPLG.listaPLG}
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
-      renderItem={({ item }) => (
+      renderItem={({ item: itemPLG }) => (
         <View style={estilosPLG.celulaPLG}>
-          <ProductCard produtoPLG={item} aoAbrirPLG={aoAbrirPLG} />
+          <ProductCardPLG produtoPLG={itemPLG} aoAbrirPLG={aoAbrirPLG} />
         </View>
       )}
     />

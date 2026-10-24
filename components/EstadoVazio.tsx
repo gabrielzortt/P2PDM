@@ -12,7 +12,7 @@ interface EstadoVazioPropsPLG {
   aoPressionarPLG?: () => void;
 }
 
-export default function EstadoVazio({ iconePLG, tituloPLG, textoPLG, botaoPLG, aoPressionarPLG }: EstadoVazioPropsPLG) {
+export default function EstadoVazioPLG({ iconePLG, tituloPLG, textoPLG, botaoPLG, aoPressionarPLG }: EstadoVazioPropsPLG) {
   return (
     <View style={estilosPLG.caixaPLG}>
       <View style={estilosPLG.circuloPLG}>

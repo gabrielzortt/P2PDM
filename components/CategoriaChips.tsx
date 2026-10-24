@@ -8,7 +8,7 @@ interface CategoriaChipsPropsPLG {
   aoSelecionarPLG: (valorPLG: string) => void;
 }
 
-export default function CategoriaChips({ opcoesPLG, selecionadaPLG, aoSelecionarPLG }: CategoriaChipsPropsPLG) {
+export default function CategoriaChipsPLG({ opcoesPLG, selecionadaPLG, aoSelecionarPLG }: CategoriaChipsPropsPLG) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={estilosPLG.linhaPLG}>
       {opcoesPLG.map((opcaoPLG) => {

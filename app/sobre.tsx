@@ -31,14 +31,14 @@ export default function SobrePLG() {
         </LinearGradient>
 
         <View style={estilosPLG.listaPLG}>
-          {infosPLG.map((info, i) => (
-            <View key={info.rotuloPLG} style={[estilosPLG.infoPLG, i < infosPLG.length - 1 && estilosPLG.infoBordaPLG]}>
+          {infosPLG.map((infoPLG, iPLG) => (
+            <View key={infoPLG.rotuloPLG} style={[estilosPLG.infoPLG, iPLG < infosPLG.length - 1 && estilosPLG.infoBordaPLG]}>
               <View style={estilosPLG.infoIconePLG}>
-                <Ionicons name={info.iconePLG} size={21} color={corPLG.ouroEscuroPLG} />
+                <Ionicons name={infoPLG.iconePLG} size={21} color={corPLG.ouroEscuroPLG} />
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={estilosPLG.infoRotuloPLG}>{info.rotuloPLG}</Text>
-                <Text style={estilosPLG.infoValorPLG}>{info.valorPLG}</Text>
+                <Text style={estilosPLG.infoRotuloPLG}>{infoPLG.rotuloPLG}</Text>
+                <Text style={estilosPLG.infoValorPLG}>{infoPLG.valorPLG}</Text>
               </View>
             </View>
           ))}

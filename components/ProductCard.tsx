@@ -11,12 +11,12 @@ interface ProductCardPropsPLG {
   aoAbrirPLG: (idPLG: string) => void;
 }
 
-export default function ProductCard({ produtoPLG, aoAbrirPLG }: ProductCardPropsPLG) {
-  const { favoritosPLG, alternarFavoritoPLG, adicionarPLG, mostrarToastPLG } = useLojaPLG();
+export default function ProductCardPLG({ produtoPLG, aoAbrirPLG }: ProductCardPropsPLG) {
+  const { favoritosPLG, alternarFavoritoPLG } = useLojaPLG();
   const favoritoPLG = favoritosPLG.includes(produtoPLG.idPLG);
 
   return (
-    <Pressable style={({ pressed }) => [estilosPLG.cartaoPLG, pressed && { transform: [{ scale: 0.98 }] }]} onPress={() => aoAbrirPLG(produtoPLG.idPLG)}>
+    <Pressable style={({ pressed: pressedPLG }) => [estilosPLG.cartaoPLG, pressedPLG && { transform: [{ scale: 0.98 }] }]} onPress={() => aoAbrirPLG(produtoPLG.idPLG)}>
       <View>
         <ImagemPLG fontePLG={produtoPLG.imagensPLG?.[0]} legendaPLG={`${produtoPLG.nomePLG} – ${produtoPLG.subtituloPLG}`} estiloPLG={estilosPLG.imagemPLG} compactoPLG />
         <View style={estilosPLG.notaPLG}>
@@ -34,11 +34,8 @@ export default function ProductCard({ produtoPLG, aoAbrirPLG }: ProductCardProps
         <TouchableOpacity
           style={estilosPLG.botaoPLG}
           activeOpacity={0.85}
-          onPress={() => {
-            adicionarPLG(produtoPLG);
-            mostrarToastPLG(`${produtoPLG.nomePLG} adicionado ao carrinho`);
-          }}
-          accessibilityLabel={`Adicionar ${produtoPLG.nomePLG} ao carrinho`}
+          onPress={() => aoAbrirPLG(produtoPLG.idPLG)}
+          accessibilityLabel={`Ver detalhes de ${produtoPLG.nomePLG}`}
         >
           <Ionicons name="add" size={20} color={corPLG.brancoPLG} />
         </TouchableOpacity>

@@ -39,8 +39,8 @@ export default function BoasVindasPLG() {
   const alturaImagemPLG = alturaPLG * 0.62;
   const ultimoPLG = indicePLG === slidesPLG.length - 1;
 
-  const aoTerminarRolagemPLG = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    setIndicePLG(Math.round(e.nativeEvent.contentOffset.x / larguraPLG));
+  const aoTerminarRolagemPLG = (ePLG: NativeSyntheticEvent<NativeScrollEvent>) => {
+    setIndicePLG(Math.round(ePLG.nativeEvent.contentOffset.x / larguraPLG));
   };
 
   const avancarPLG = () => {
@@ -65,8 +65,8 @@ export default function BoasVindasPLG() {
         onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: posicaoPLG } } }], { useNativeDriver: false })}
         onMomentumScrollEnd={aoTerminarRolagemPLG}
       >
-        {slidesPLG.map((slidePLG, i) => {
-          const faixaPLG = [(i - 1) * larguraPLG, i * larguraPLG, (i + 1) * larguraPLG];
+        {slidesPLG.map((slidePLG, iPLG) => {
+          const faixaPLG = [(iPLG - 1) * larguraPLG, iPLG * larguraPLG, (iPLG + 1) * larguraPLG];
           const deslocamentoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [larguraPLG * 0.25, 0, -larguraPLG * 0.25], extrapolate: 'clamp' });
           const opacidadePLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [0, 1, 0], extrapolate: 'clamp' });
           return (
@@ -97,8 +97,8 @@ export default function BoasVindasPLG() {
 
       <View style={[estilosPLG.rodapePLG, { paddingBottom: Math.max(insetsPLG.bottom, 20) + 6 }]}>
         <View style={estilosPLG.pontosPLG}>
-          {slidesPLG.map((slidePLG, i) => {
-            const faixaPLG = [(i - 1) * larguraPLG, i * larguraPLG, (i + 1) * larguraPLG];
+          {slidesPLG.map((slidePLG, iPLG) => {
+            const faixaPLG = [(iPLG - 1) * larguraPLG, iPLG * larguraPLG, (iPLG + 1) * larguraPLG];
             const larguraPontoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [8, 30, 8], extrapolate: 'clamp' });
             const opacidadePontoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [0.5, 1, 0.5], extrapolate: 'clamp' });
             return <Animated.View key={slidePLG.idPLG} style={[estilosPLG.pontoPLG, { width: larguraPontoPLG, opacity: opacidadePontoPLG }]} />;

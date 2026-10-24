@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import CabecalhoPLG from '../components/CabecalhoPLG';
-import EstadoVazio from '../components/EstadoVazio';
+import EstadoVazioPLG from '../components/EstadoVazio';
 import { useLojaPLG } from '../context/LojaPLG';
 import { formatarPrecoPLG } from '../data/produtosPLG';
 import { corPLG, fontePLG, sombraPLG } from '../constants/temaPLG';
@@ -19,30 +19,30 @@ export default function PedidosPLG() {
       <CabecalhoPLG tituloPLG="Meus pedidos" />
       <FlatList
         data={pedidosPLG}
-        keyExtractor={(p) => p.idPLG}
+        keyExtractor={(pPLG) => pPLG.idPLG}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<EstadoVazio iconePLG="receipt-outline" tituloPLG="Nenhum pedido ainda" textoPLG="Quando você finalizar uma compra, ela aparecerá aqui." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/inicio')} />}
-        renderItem={({ item }) => (
+        ListEmptyComponent={<EstadoVazioPLG iconePLG="receipt-outline" tituloPLG="Nenhum pedido ainda" textoPLG="Quando você finalizar uma compra, ela aparecerá aqui." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/inicio')} />}
+        renderItem={({ item: itemPLG }) => (
           <View style={estilosPLG.cartaoPLG}>
             <View style={estilosPLG.topoPLG}>
               <View>
-                <Text style={estilosPLG.numeroPLG}>Pedido #{item.idPLG}</Text>
-                <Text style={estilosPLG.dataPLG}>{item.dataPLG} · {item.pagamentoPLG}</Text>
+                <Text style={estilosPLG.numeroPLG}>Pedido #{itemPLG.idPLG}</Text>
+                <Text style={estilosPLG.dataPLG}>{itemPLG.dataPLG} · {itemPLG.pagamentoPLG}</Text>
               </View>
               <View style={estilosPLG.statusPLG}>
                 <Ionicons name="time-outline" size={13} color={corPLG.ouroEscuroPLG} />
-                <Text style={estilosPLG.statusTextoPLG}>{item.statusPLG}</Text>
+                <Text style={estilosPLG.statusTextoPLG}>{itemPLG.statusPLG}</Text>
               </View>
             </View>
-            {item.itensPLG.map((i) => (
-              <Text key={`${i.produtoPLG.idPLG}-${i.grauPLG}`} style={estilosPLG.itemPLG}>
-                {i.quantidadePLG}x {i.produtoPLG.nomePLG} ({i.grauPLG})
+            {itemPLG.itensPLG.map((iPLG) => (
+              <Text key={`${iPLG.produtoPLG.idPLG}-${iPLG.grauPLG}`} style={estilosPLG.itemPLG}>
+                {iPLG.quantidadePLG}x {iPLG.produtoPLG.nomePLG} ({iPLG.grauPLG})
               </Text>
             ))}
             <View style={estilosPLG.rodapePLG}>
               <Text style={estilosPLG.totalRotuloPLG}>Total</Text>
-              <Text style={estilosPLG.totalPLG}>{formatarPrecoPLG(item.totalPLG)}</Text>
+              <Text style={estilosPLG.totalPLG}>{formatarPrecoPLG(itemPLG.totalPLG)}</Text>
             </View>
           </View>
         )}

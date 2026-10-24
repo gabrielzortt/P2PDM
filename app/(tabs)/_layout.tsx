@@ -29,18 +29,18 @@ export default function TabsLayoutPLG() {
         },
       }}
     >
-      <Tabs.Screen name="inicio" options={{ tabBarIcon: ({ color }) => <Ionicons name="home" size={26} color={color} /> }} />
-      <Tabs.Screen name="favoritos" options={{ tabBarIcon: ({ color }) => <Ionicons name="heart" size={26} color={color} /> }} />
+      <Tabs.Screen name="inicio" options={{ tabBarIcon: ({ color: colorPLG }) => <Ionicons name="home" size={26} color={colorPLG} /> }} />
+      <Tabs.Screen name="favoritos" options={{ tabBarIcon: ({ color: colorPLG }) => <Ionicons name="heart" size={26} color={colorPLG} /> }} />
       <Tabs.Screen
         name="carrinho"
         options={{
           tabBarBadge: quantidadeTotalPLG > 0 ? quantidadeTotalPLG : undefined,
           tabBarBadgeStyle: { backgroundColor: corPLG.ouroPLG, color: corPLG.brancoPLG, fontFamily: fontePLG.semiPLG, fontSize: 10 },
-          tabBarIcon: ({ color }) => <Ionicons name="bag" size={26} color={color} />,
+          tabBarIcon: ({ color: colorPLG }) => <Ionicons name="bag" size={26} color={colorPLG} />,
         }}
       />
-      <Tabs.Screen name="notificacoes" options={{ tabBarIcon: ({ color }) => <Ionicons name="notifications" size={26} color={color} /> }} />
-      <Tabs.Screen name="perfil" options={{ tabBarIcon: ({ color }) => <Ionicons name="person" size={26} color={color} /> }} />
+      <Tabs.Screen name="notificacoes" options={{ tabBarIcon: ({ color: colorPLG }) => <Ionicons name="notifications" size={26} color={colorPLG} /> }} />
+      <Tabs.Screen name="perfil" options={{ tabBarIcon: ({ color: colorPLG }) => <Ionicons name="person" size={26} color={colorPLG} /> }} />
     </Tabs>
   );
 }

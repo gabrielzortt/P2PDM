@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ConfirmarModal from '../../components/ConfirmarModal';
+import ConfirmarModalPLG from '../../components/ConfirmarModal';
 import { useLojaPLG } from '../../context/LojaPLG';
 import { corPLG, fontePLG, gradientePLG, sombraPLG, IconePLG } from '../../constants/temaPLG';
 
@@ -48,21 +48,21 @@ export default function PerfilPLG() {
         </LinearGradient>
 
         <View style={estilosPLG.estatisticasPLG}>
-          {estatisticasPLG.map((e, i) => (
-            <View key={e.rotuloPLG} style={[estilosPLG.estatisticaPLG, i < estatisticasPLG.length - 1 && estilosPLG.divisorPLG]}>
-              <Text style={estilosPLG.estatisticaValorPLG}>{e.valorPLG}</Text>
-              <Text style={estilosPLG.estatisticaRotuloPLG}>{e.rotuloPLG}</Text>
+          {estatisticasPLG.map((ePLG, iPLG) => (
+            <View key={ePLG.rotuloPLG} style={[estilosPLG.estatisticaPLG, iPLG < estatisticasPLG.length - 1 && estilosPLG.divisorPLG]}>
+              <Text style={estilosPLG.estatisticaValorPLG}>{ePLG.valorPLG}</Text>
+              <Text style={estilosPLG.estatisticaRotuloPLG}>{ePLG.rotuloPLG}</Text>
             </View>
           ))}
         </View>
 
         <View style={estilosPLG.menuPLG}>
-          {menuPLG.map((item, i) => (
-            <TouchableOpacity key={item.rotuloPLG} style={[estilosPLG.itemPLG, i < menuPLG.length - 1 && estilosPLG.itemBordaPLG]} activeOpacity={0.7} onPress={item.aoPressionarPLG}>
+          {menuPLG.map((itemPLG, iPLG) => (
+            <TouchableOpacity key={itemPLG.rotuloPLG} style={[estilosPLG.itemPLG, iPLG < menuPLG.length - 1 && estilosPLG.itemBordaPLG]} activeOpacity={0.7} onPress={itemPLG.aoPressionarPLG}>
               <View style={estilosPLG.itemIconePLG}>
-                <Ionicons name={item.iconePLG} size={21} color={corPLG.ouroEscuroPLG} />
+                <Ionicons name={itemPLG.iconePLG} size={21} color={corPLG.ouroEscuroPLG} />
               </View>
-              <Text style={estilosPLG.itemTextoPLG}>{item.rotuloPLG}</Text>
+              <Text style={estilosPLG.itemTextoPLG}>{itemPLG.rotuloPLG}</Text>
               <Ionicons name="chevron-forward" size={18} color="#B8ABA2" />
             </TouchableOpacity>
           ))}
@@ -74,7 +74,7 @@ export default function PerfilPLG() {
         </TouchableOpacity>
       </ScrollView>
 
-      <ConfirmarModal
+      <ConfirmarModalPLG
         visivelPLG={sairAbertoPLG}
         tituloPLG="Sair da conta?"
         textoPLG="Você precisará entrar novamente para continuar suas compras."

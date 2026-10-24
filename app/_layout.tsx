@@ -6,7 +6,7 @@ import { LojaProviderPLG } from '../context/LojaPLG';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+export default function RootLayoutPLG() {
   const [fontesCarregadasPLG] = useFonts({
     Sora_400Regular, Sora_500Medium, Sora_600SemiBold,
   });

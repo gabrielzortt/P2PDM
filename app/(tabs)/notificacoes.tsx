@@ -23,21 +23,21 @@ export default function NotificacoesPLG() {
       </View>
       <FlatList
         data={avisosPLG}
-        keyExtractor={(a) => a.idPLG}
+        keyExtractor={(aPLG) => aPLG.idPLG}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => (
+        renderItem={({ item: itemPLG }) => (
           <View style={estilosPLG.itemPLG}>
             <View style={estilosPLG.iconePLG}>
-              <Ionicons name={item.iconePLG} size={22} color={corPLG.brancoPLG} />
+              <Ionicons name={itemPLG.iconePLG} size={22} color={corPLG.brancoPLG} />
             </View>
             <View style={{ flex: 1 }}>
               <View style={estilosPLG.linhaPLG}>
-                <Text style={estilosPLG.itemTituloPLG}>{item.tituloPLG}</Text>
-                {item.novoPLG && <View style={estilosPLG.pontoPLG} />}
+                <Text style={estilosPLG.itemTituloPLG}>{itemPLG.tituloPLG}</Text>
+                {itemPLG.novoPLG && <View style={estilosPLG.pontoPLG} />}
               </View>
-              <Text style={estilosPLG.textoPLG}>{item.textoPLG}</Text>
-              <Text style={estilosPLG.tempoPLG}>{item.tempoPLG}</Text>
+              <Text style={estilosPLG.textoPLG}>{itemPLG.textoPLG}</Text>
+              <Text style={estilosPLG.tempoPLG}>{itemPLG.tempoPLG}</Text>
             </View>
           </View>
         )}

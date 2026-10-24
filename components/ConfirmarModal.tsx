@@ -12,7 +12,7 @@ interface ConfirmarPropsPLG {
   aoCancelarPLG: () => void;
 }
 
-export default function ConfirmarModal({ visivelPLG, tituloPLG, textoPLG, confirmarPLG, aoConfirmarPLG, aoCancelarPLG }: ConfirmarPropsPLG) {
+export default function ConfirmarModalPLG({ visivelPLG, tituloPLG, textoPLG, confirmarPLG, aoConfirmarPLG, aoCancelarPLG }: ConfirmarPropsPLG) {
   return (
     <Modal visible={visivelPLG} transparent animationType="fade" onRequestClose={aoCancelarPLG}>
       <Pressable style={estilosPLG.fundoPLG} onPress={aoCancelarPLG}>

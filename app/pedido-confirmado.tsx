@@ -11,13 +11,13 @@ import { formatarPrecoPLG } from '../data/produtosPLG';
 import { corPLG, fontePLG, gradientePLG } from '../constants/temaPLG';
 
 export default function PedidoConfirmadoPLG() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id: idPLG } = useLocalSearchParams<{ id: string }>();
   const roteadorPLG = useRouter();
   const insetsPLG = useSafeAreaInsets();
   const { pedidosPLG } = useLojaPLG();
   const escalaPLG = useRef(new Animated.Value(0)).current;
   const opacidadePLG = useRef(new Animated.Value(0)).current;
-  const pedidoPLG = pedidosPLG.find((p) => p.idPLG === id);
+  const pedidoPLG = pedidosPLG.find((pPLG) => pPLG.idPLG === idPLG);
 
   useEffect(() => {
     Animated.sequence([
@@ -40,7 +40,7 @@ export default function PedidoConfirmadoPLG() {
           <View style={estilosPLG.cartaoPLG}>
             <View style={estilosPLG.linhaPLG}>
               <Text style={estilosPLG.rotuloPLG}>Pedido</Text>
-              <Text style={estilosPLG.valorPLG}>#{id}</Text>
+              <Text style={estilosPLG.valorPLG}>#{idPLG}</Text>
             </View>
             {pedidoPLG && (
               <>

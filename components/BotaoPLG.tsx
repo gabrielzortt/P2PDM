@@ -22,13 +22,13 @@ export default function BotaoPLG({ tituloPLG, aoPressionarPLG, variantePLG = 'pr
     <Pressable
       onPress={aoPressionarPLG}
       accessibilityRole="button"
-      style={({ pressed }) => [
+      style={({ pressed: pressedPLG }) => [
         estilosPLG.basePLG,
         { height: alturaPLG, borderRadius: raioPLG },
         variantePLG === 'primario' && estilosPLG.sombraPrimarioPLG,
         variantePLG === 'secundario' && estilosPLG.secundarioPLG,
         variantePLG === 'escuro' && estilosPLG.escuroPLG,
-        pressed && { transform: [{ scale: 0.97 }], opacity: 0.93 },
+        pressedPLG && { transform: [{ scale: 0.97 }], opacity: 0.93 },
         estiloPLG,
       ]}
     >

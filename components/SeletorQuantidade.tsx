@@ -9,7 +9,7 @@ interface SeletorPropsPLG {
   aoAumentarPLG: () => void;
 }
 
-export default function SeletorQuantidade({ valorPLG, aoDiminuirPLG, aoAumentarPLG }: SeletorPropsPLG) {
+export default function SeletorQuantidadePLG({ valorPLG, aoDiminuirPLG, aoAumentarPLG }: SeletorPropsPLG) {
   return (
     <View style={estilosPLG.linhaPLG}>
       <TouchableOpacity style={estilosPLG.botaoPLG} onPress={aoDiminuirPLG} accessibilityLabel="Diminuir quantidade">

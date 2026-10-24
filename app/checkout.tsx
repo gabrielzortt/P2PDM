@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CabecalhoPLG from '../components/CabecalhoPLG';
 import CampoPLG from '../components/CampoPLG';
 import BotaoPLG from '../components/BotaoPLG';
-import EstadoVazio from '../components/EstadoVazio';
+import EstadoVazioPLG from '../components/EstadoVazio';
 import { useLojaPLG } from '../context/LojaPLG';
 import { fatorGrauPLG, formatarPrecoPLG } from '../data/produtosPLG';
 import { corPLG, fontePLG, sombraPLG, IconePLG } from '../constants/temaPLG';
@@ -37,7 +37,7 @@ export default function CheckoutPLG() {
       <View style={estilosPLG.telaPLG}>
         <StatusBar style="dark" />
         <CabecalhoPLG tituloPLG="Finalizar compra" />
-        <EstadoVazio iconePLG="bag-outline" tituloPLG="Carrinho vazio" textoPLG="Adicione peças ao carrinho para finalizar a compra." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/inicio')} />
+        <EstadoVazioPLG iconePLG="bag-outline" tituloPLG="Carrinho vazio" textoPLG="Adicione peças ao carrinho para finalizar a compra." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/inicio')} />
       </View>
     );
   }
@@ -87,16 +87,16 @@ export default function CheckoutPLG() {
             <Text style={estilosPLG.secaoTituloPLG}>Forma de pagamento</Text>
           </View>
           <View style={{ gap: 10 }}>
-            {pagamentosPLG.map((p) => {
-              const ativoPLG = p.nomePLG === pagamentoPLG;
+            {pagamentosPLG.map((pPLG) => {
+              const ativoPLG = pPLG.nomePLG === pagamentoPLG;
               return (
-                <TouchableOpacity key={p.nomePLG} activeOpacity={0.85} style={[estilosPLG.pagamentoPLG, ativoPLG && estilosPLG.pagamentoAtivoPLG]} onPress={() => setPagamentoPLG(p.nomePLG)}>
+                <TouchableOpacity key={pPLG.nomePLG} activeOpacity={0.85} style={[estilosPLG.pagamentoPLG, ativoPLG && estilosPLG.pagamentoAtivoPLG]} onPress={() => setPagamentoPLG(pPLG.nomePLG)}>
                   <View style={estilosPLG.pagamentoIconePLG}>
-                    <Ionicons name={p.iconePLG} size={22} color={corPLG.ouroEscuroPLG} />
+                    <Ionicons name={pPLG.iconePLG} size={22} color={corPLG.ouroEscuroPLG} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={estilosPLG.pagamentoNomePLG}>{p.nomePLG}</Text>
-                    <Text style={estilosPLG.pagamentoDetalhePLG}>{p.detalhePLG}</Text>
+                    <Text style={estilosPLG.pagamentoNomePLG}>{pPLG.nomePLG}</Text>
+                    <Text style={estilosPLG.pagamentoDetalhePLG}>{pPLG.detalhePLG}</Text>
                   </View>
                   <Ionicons name={ativoPLG ? 'radio-button-on' : 'radio-button-off'} size={22} color={ativoPLG ? corPLG.ouroPLG : '#C9BDB4'} />
                 </TouchableOpacity>
@@ -110,10 +110,10 @@ export default function CheckoutPLG() {
             <View style={estilosPLG.numeroPLG}><Text style={estilosPLG.numeroTextoPLG}>3</Text></View>
             <Text style={estilosPLG.secaoTituloPLG}>Resumo do pedido</Text>
           </View>
-          {itensPLG.map((i) => (
-            <View key={`${i.produtoPLG.idPLG}-${i.grauPLG}`} style={estilosPLG.linhaPLG}>
-              <Text style={estilosPLG.linhaTextoPLG} numberOfLines={1}>{i.quantidadePLG}x {i.produtoPLG.nomePLG} ({i.grauPLG})</Text>
-              <Text style={estilosPLG.linhaValorPLG}>{formatarPrecoPLG(i.produtoPLG.precoPLG * fatorGrauPLG[i.grauPLG] * i.quantidadePLG)}</Text>
+          {itensPLG.map((iPLG) => (
+            <View key={`${iPLG.produtoPLG.idPLG}-${iPLG.grauPLG}`} style={estilosPLG.linhaPLG}>
+              <Text style={estilosPLG.linhaTextoPLG} numberOfLines={1}>{iPLG.quantidadePLG}x {iPLG.produtoPLG.nomePLG} ({iPLG.grauPLG})</Text>
+              <Text style={estilosPLG.linhaValorPLG}>{formatarPrecoPLG(iPLG.produtoPLG.precoPLG * fatorGrauPLG[iPLG.grauPLG] * iPLG.quantidadePLG)}</Text>
             </View>
           ))}
           <View style={estilosPLG.divisorPLG} />

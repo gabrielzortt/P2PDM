@@ -4,9 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ProductList from '../../components/ProductList';
-import CategoriaChips from '../../components/CategoriaChips';
-import EstadoVazio from '../../components/EstadoVazio';
+import ProductListPLG from '../../components/ProductList';
+import CategoriaChipsPLG from '../../components/CategoriaChips';
+import EstadoVazioPLG from '../../components/EstadoVazio';
 import { OrdemPLG, filtrosPLG, filtrarPorChipPLG, ordenarPLG, ordensPLG, produtosPLG } from '../../data/produtosPLG';
 import { useLojaPLG } from '../../context/LojaPLG';
 import { corPLG, fontePLG, sombraPLG } from '../../constants/temaPLG';
@@ -23,7 +23,7 @@ export default function InicioPLG() {
   const listaPLG = useMemo(() => {
     const termoPLG = buscaPLG.trim().toLowerCase();
     const filtradaPLG = produtosPLG.filter(
-      (p) => filtrarPorChipPLG(p, filtroPLG) && (termoPLG === '' || `${p.nomePLG} ${p.subtituloPLG} ${p.anoPLG}`.toLowerCase().includes(termoPLG))
+      (pPLG) => filtrarPorChipPLG(pPLG, filtroPLG) && (termoPLG === '' || `${pPLG.nomePLG} ${pPLG.subtituloPLG} ${pPLG.anoPLG}`.toLowerCase().includes(termoPLG))
     );
     return ordenarPLG(filtradaPLG, ordemPLG);
   }, [buscaPLG, filtroPLG, ordemPLG]);
@@ -60,15 +60,15 @@ export default function InicioPLG() {
         </TouchableOpacity>
       </View>
 
-      <ProductList
+      <ProductListPLG
         produtosPLG={listaPLG}
-        aoAbrirPLG={(id) => roteadorPLG.push({ pathname: '/produto/[id]', params: { id } })}
+        aoAbrirPLG={(idPLG) => roteadorPLG.push({ pathname: '/produto/[id]', params: { id: idPLG } })}
         cabecalhoPLG={
           <View style={{ marginHorizontal: -20 }}>
-            <CategoriaChips opcoesPLG={filtrosPLG} selecionadaPLG={filtroPLG} aoSelecionarPLG={setFiltroPLG} />
+            <CategoriaChipsPLG opcoesPLG={filtrosPLG} selecionadaPLG={filtroPLG} aoSelecionarPLG={setFiltroPLG} />
           </View>
         }
-        vazioPLG={<EstadoVazio iconePLG="search-outline" tituloPLG="Nada encontrado" textoPLG="Tente buscar por outro nome ou mude o filtro." botaoPLG="Limpar filtros" aoPressionarPLG={() => { setBuscaPLG(''); setFiltroPLG('Todos'); }} />}
+        vazioPLG={<EstadoVazioPLG iconePLG="search-outline" tituloPLG="Nada encontrado" textoPLG="Tente buscar por outro nome ou mude o filtro." botaoPLG="Limpar filtros" aoPressionarPLG={() => { setBuscaPLG(''); setFiltroPLG('Todos'); }} />}
       />
 
       <Modal visible={ordenarAbertoPLG} transparent animationType="slide" onRequestClose={() => setOrdenarAbertoPLG(false)}>
@@ -76,11 +76,11 @@ export default function InicioPLG() {
           <Pressable style={estilosPLG.folhaPLG} onPress={() => undefined}>
             <View style={estilosPLG.alcaPLG} />
             <Text style={estilosPLG.folhaTituloPLG}>Ordenar por</Text>
-            {ordensPLG.map((o) => {
-              const ativaPLG = o.chavePLG === ordemPLG;
+            {ordensPLG.map((oPLG) => {
+              const ativaPLG = oPLG.chavePLG === ordemPLG;
               return (
-                <TouchableOpacity key={o.chavePLG} style={[estilosPLG.opcaoPLG, ativaPLG && estilosPLG.opcaoAtivaPLG]} onPress={() => { setOrdemPLG(o.chavePLG); setOrdenarAbertoPLG(false); }}>
-                  <Text style={[estilosPLG.opcaoTextoPLG, ativaPLG && { fontFamily: fontePLG.semiPLG, color: corPLG.ouroEscuroPLG }]}>{o.rotuloPLG}</Text>
+                <TouchableOpacity key={oPLG.chavePLG} style={[estilosPLG.opcaoPLG, ativaPLG && estilosPLG.opcaoAtivaPLG]} onPress={() => { setOrdemPLG(oPLG.chavePLG); setOrdenarAbertoPLG(false); }}>
+                  <Text style={[estilosPLG.opcaoTextoPLG, ativaPLG && { fontFamily: fontePLG.semiPLG, color: corPLG.ouroEscuroPLG }]}>{oPLG.rotuloPLG}</Text>
                   {ativaPLG && <Ionicons name="checkmark-circle" size={22} color={corPLG.ouroPLG} />}
                 </TouchableOpacity>
               );

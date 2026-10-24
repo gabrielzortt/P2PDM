@@ -5,9 +5,9 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagemPLG from '../../components/ImagemPLG';
-import SeletorQuantidade from '../../components/SeletorQuantidade';
+import SeletorQuantidadePLG from '../../components/SeletorQuantidade';
 import BotaoPLG from '../../components/BotaoPLG';
-import EstadoVazio from '../../components/EstadoVazio';
+import EstadoVazioPLG from '../../components/EstadoVazio';
 import { useLojaPLG } from '../../context/LojaPLG';
 import { fatorGrauPLG, formatarPrecoPLG } from '../../data/produtosPLG';
 import { corPLG, fontePLG, sombraPLG } from '../../constants/temaPLG';
@@ -74,25 +74,25 @@ export default function CarrinhoPLG() {
       </View>
       <FlatList
         data={itensPLG}
-        keyExtractor={(i) => `${i.produtoPLG.idPLG}-${i.grauPLG}`}
+        keyExtractor={(iPLG) => `${iPLG.produtoPLG.idPLG}-${iPLG.grauPLG}`}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<EstadoVazio iconePLG="bag-outline" tituloPLG="Seu carrinho está vazio" textoPLG="Que tal conhecer as peças mais procuradas da loja?" botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.push('/inicio')} />}
+        ListEmptyComponent={<EstadoVazioPLG iconePLG="bag-outline" tituloPLG="Seu carrinho está vazio" textoPLG="Que tal conhecer as peças mais procuradas da loja?" botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.push('/inicio')} />}
         ListFooterComponent={itensPLG.length > 0 ? resumoPLG : null}
-        renderItem={({ item }) => (
+        renderItem={({ item: itemPLG }) => (
           <View style={estilosPLG.itemPLG}>
-            <ImagemPLG fontePLG={item.produtoPLG.imagensPLG?.[0]} compactoPLG estiloPLG={estilosPLG.miniaturaPLG} />
+            <ImagemPLG fontePLG={itemPLG.produtoPLG.imagensPLG?.[0]} compactoPLG estiloPLG={estilosPLG.miniaturaPLG} />
             <View style={{ flex: 1, gap: 3 }}>
-              <Text style={estilosPLG.nomePLG} numberOfLines={1}>{item.produtoPLG.nomePLG}</Text>
-              <Text style={estilosPLG.detalhePLG}>{item.produtoPLG.subtituloPLG} · {item.grauPLG}</Text>
-              <Text style={estilosPLG.precoPLG}>{formatarPrecoPLG(item.produtoPLG.precoPLG * fatorGrauPLG[item.grauPLG] * item.quantidadePLG)}</Text>
+              <Text style={estilosPLG.nomePLG} numberOfLines={1}>{itemPLG.produtoPLG.nomePLG}</Text>
+              <Text style={estilosPLG.detalhePLG}>{itemPLG.produtoPLG.subtituloPLG} · {itemPLG.grauPLG}</Text>
+              <Text style={estilosPLG.precoPLG}>{formatarPrecoPLG(itemPLG.produtoPLG.precoPLG * fatorGrauPLG[itemPLG.grauPLG] * itemPLG.quantidadePLG)}</Text>
               <View style={estilosPLG.acoesPLG}>
-                <SeletorQuantidade
-                  valorPLG={item.quantidadePLG}
-                  aoDiminuirPLG={() => alterarQuantidadePLG(item.produtoPLG.idPLG, item.grauPLG, -1)}
-                  aoAumentarPLG={() => alterarQuantidadePLG(item.produtoPLG.idPLG, item.grauPLG, 1)}
+                <SeletorQuantidadePLG
+                  valorPLG={itemPLG.quantidadePLG}
+                  aoDiminuirPLG={() => alterarQuantidadePLG(itemPLG.produtoPLG.idPLG, itemPLG.grauPLG, -1)}
+                  aoAumentarPLG={() => alterarQuantidadePLG(itemPLG.produtoPLG.idPLG, itemPLG.grauPLG, 1)}
                 />
-                <TouchableOpacity onPress={() => removerPLG(item.produtoPLG.idPLG, item.grauPLG)} accessibilityLabel="Remover item" style={estilosPLG.lixoPLG}>
+                <TouchableOpacity onPress={() => removerPLG(itemPLG.produtoPLG.idPLG, itemPLG.grauPLG)} accessibilityLabel="Remover item" style={estilosPLG.lixoPLG}>
                   <Ionicons name="trash-outline" size={20} color={corPLG.erroPLG} />
                 </TouchableOpacity>
               </View>

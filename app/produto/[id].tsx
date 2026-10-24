@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagemPLG from '../../components/ImagemPLG';
 import BotaoPLG from '../../components/BotaoPLG';
-import EstadoVazio from '../../components/EstadoVazio';
+import EstadoVazioPLG from '../../components/EstadoVazio';
 import {
   GrauPLG, buscarProdutoPorIdPLG, fatorGrauPLG, formatarAvaliacoesPLG, formatarPrecoPLG, grausPLG, nomeGrauPLG,
 } from '../../data/produtosPLG';
@@ -16,19 +16,19 @@ import { corPLG, fontePLG, sombraPLG, IconePLG } from '../../constants/temaPLG';
 const limiteDescricaoPLG: number = 110;
 
 export default function DetalhesPLG() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id: idPLG } = useLocalSearchParams<{ id: string }>();
   const roteadorPLG = useRouter();
   const insetsPLG = useSafeAreaInsets();
   const { width: larguraPLG } = useWindowDimensions();
   const { favoritosPLG, alternarFavoritoPLG, adicionarPLG, mostrarToastPLG } = useLojaPLG();
   const [grauPLG, setGrauPLG] = useState<GrauPLG>('S');
   const [expandidaPLG, setExpandidaPLG] = useState<boolean>(false);
-  const produtoPLG = buscarProdutoPorIdPLG(id ?? '');
+  const produtoPLG = buscarProdutoPorIdPLG(idPLG ?? '');
 
   if (!produtoPLG) {
     return (
       <View style={estilosPLG.telaPLG}>
-        <EstadoVazio iconePLG="alert-circle-outline" tituloPLG="Peça não encontrada" textoPLG="Esse item não está mais disponível." botaoPLG="Voltar" aoPressionarPLG={() => roteadorPLG.back()} />
+        <EstadoVazioPLG iconePLG="alert-circle-outline" tituloPLG="Peça não encontrada" textoPLG="Esse item não está mais disponível." botaoPLG="Voltar" aoPressionarPLG={() => roteadorPLG.back()} />
       </View>
     );
   }
@@ -97,22 +97,22 @@ export default function DetalhesPLG() {
           </Text>
 
           <View style={estilosPLG.fichaPLG}>
-            {fichaPLG.map((f) => (
-              <View key={f.rotuloPLG} style={estilosPLG.fichaItemPLG}>
-                <Ionicons name={f.iconePLG} size={18} color={corPLG.ouroPLG} />
-                <Text style={estilosPLG.fichaRotuloPLG}>{f.rotuloPLG}</Text>
-                <Text style={estilosPLG.fichaValorPLG} numberOfLines={1}>{f.valorPLG}</Text>
+            {fichaPLG.map((fPLG) => (
+              <View key={fPLG.rotuloPLG} style={estilosPLG.fichaItemPLG}>
+                <Ionicons name={fPLG.iconePLG} size={18} color={corPLG.ouroPLG} />
+                <Text style={estilosPLG.fichaRotuloPLG}>{fPLG.rotuloPLG}</Text>
+                <Text style={estilosPLG.fichaValorPLG} numberOfLines={1}>{fPLG.valorPLG}</Text>
               </View>
             ))}
           </View>
 
           <Text style={[estilosPLG.secaoPLG, { marginTop: 24 }]}>Conservação</Text>
           <View style={estilosPLG.grausPLG}>
-            {grausPLG.map((g) => {
-              const ativoPLG = g === grauPLG;
+            {grausPLG.map((gPLG) => {
+              const ativoPLG = gPLG === grauPLG;
               return (
-                <TouchableOpacity key={g} activeOpacity={0.85} onPress={() => setGrauPLG(g)} style={[estilosPLG.grauPLG, ativoPLG && estilosPLG.grauAtivoPLG]}>
-                  <Text style={[estilosPLG.grauTextoPLG, ativoPLG && estilosPLG.grauTextoAtivoPLG]}>{g}</Text>
+                <TouchableOpacity key={gPLG} activeOpacity={0.85} onPress={() => setGrauPLG(gPLG)} style={[estilosPLG.grauPLG, ativoPLG && estilosPLG.grauAtivoPLG]}>
+                  <Text style={[estilosPLG.grauTextoPLG, ativoPLG && estilosPLG.grauTextoAtivoPLG]}>{gPLG}</Text>
                 </TouchableOpacity>
               );
             })}
@@ -129,7 +129,7 @@ export default function DetalhesPLG() {
         <TouchableOpacity style={estilosPLG.carrinhoBotaoPLG} onPress={adicionarAoCarrinhoPLG} accessibilityLabel="Adicionar ao carrinho">
           <Ionicons name="bag-add-outline" size={24} color={corPLG.ouroPLG} />
         </TouchableOpacity>
-        <BotaoPLG tituloPLG="Comprar agora" aoPressionarPLG={comprarAgoraPLG} alturaPLG={56} estiloPLG={{ flex: 1 }} />
+        <BotaoPLG tituloPLG="Buy Now" aoPressionarPLG={comprarAgoraPLG} alturaPLG={56} estiloPLG={{ flex: 1 }} />
       </View>
     </View>
   );

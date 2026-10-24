@@ -65,7 +65,7 @@ const cupomValidoPLG = 'COLECAO10';
 
 const ContextoPLG = createContext<LojaContextoPLG | null>(null);
 
-export function LojaProviderPLG({ children }: { children: ReactNode }) {
+export function LojaProviderPLG({ children: childrenPLG }: { children: ReactNode }) {
   const [prontoPLG, setProntoPLG] = useState<boolean>(false);
   const [usuariosPLG, setUsuariosPLG] = useState<UsuarioPLG[]>([usuarioPadraoPLG]);
   const [sessaoPLG, setSessaoPLG] = useState<string | null>(null);
@@ -84,7 +84,7 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
         const sessaoSalvaPLG = await AsyncStorage.getItem(chaveSessaoPLG);
         if (salvosPLG) {
           const listaPLG: UsuarioPLG[] = JSON.parse(salvosPLG);
-          setUsuariosPLG([usuarioPadraoPLG, ...listaPLG.filter((u) => u.emailPLG !== usuarioPadraoPLG.emailPLG)]);
+          setUsuariosPLG([usuarioPadraoPLG, ...listaPLG.filter((uPLG) => uPLG.emailPLG !== usuarioPadraoPLG.emailPLG)]);
         }
         if (sessaoSalvaPLG) setSessaoPLG(sessaoSalvaPLG);
       } catch {
@@ -99,7 +99,7 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
     AsyncStorage.setItem(chaveUsuariosPLG, JSON.stringify(listaPLG)).catch(() => undefined);
   };
 
-  const usuarioPLG = usuariosPLG.find((u) => u.emailPLG === sessaoPLG) ?? null;
+  const usuarioPLG = usuariosPLG.find((uPLG) => uPLG.emailPLG === sessaoPLG) ?? null;
 
   const mostrarToastPLG = (mensagemPLG: string) => {
     setToastPLG(mensagemPLG);
@@ -113,7 +113,7 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
   const entrarPLG = (emailPLG: string, senhaPLG: string): string | null => {
     const emailLimpoPLG = emailPLG.trim().toLowerCase();
     if (emailLimpoPLG === '' || senhaPLG === '') return 'Preencha o e-mail e a senha para entrar.';
-    const encontradoPLG = usuariosPLG.find((u) => u.emailPLG === emailLimpoPLG);
+    const encontradoPLG = usuariosPLG.find((uPLG) => uPLG.emailPLG === emailLimpoPLG);
     if (!encontradoPLG) return 'E-mail incorreto. Confira ou crie uma conta.';
     if (encontradoPLG.senhaPLG !== senhaPLG) return 'Senha incorreta. Tente novamente.';
     setSessaoPLG(encontradoPLG.emailPLG);
@@ -123,7 +123,7 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
 
   const cadastrarPLG = (nomePLG: string, emailPLG: string, senhaPLG: string): string | null => {
     const emailLimpoPLG = emailPLG.trim().toLowerCase();
-    if (usuariosPLG.some((u) => u.emailPLG === emailLimpoPLG)) return 'Este e-mail já está cadastrado.';
+    if (usuariosPLG.some((uPLG) => uPLG.emailPLG === emailLimpoPLG)) return 'Este e-mail já está cadastrado.';
     const novoPLG: UsuarioPLG = { nomePLG: nomePLG.trim(), emailPLG: emailLimpoPLG, senhaPLG, telefonePLG: '' };
     salvarUsuariosPLG([...usuariosPLG, novoPLG]);
     setSessaoPLG(novoPLG.emailPLG);
@@ -140,18 +140,18 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
 
   const atualizarPerfilPLG = (nomePLG: string, telefonePLG: string) => {
     salvarUsuariosPLG(
-      usuariosPLG.map((u) => (u.emailPLG === sessaoPLG ? { ...u, nomePLG: nomePLG.trim(), telefonePLG } : u))
+      usuariosPLG.map((uPLG) => (uPLG.emailPLG === sessaoPLG ? { ...uPLG, nomePLG: nomePLG.trim(), telefonePLG } : uPLG))
     );
   };
 
   const adicionarPLG = (produtoPLG: ProdutoPLG, grauPLG: GrauPLG = 'S', quantidadePLG: number = 1) => {
     setItensPLG((anteriorPLG) => {
-      const existePLG = anteriorPLG.some((i) => i.produtoPLG.idPLG === produtoPLG.idPLG && i.grauPLG === grauPLG);
+      const existePLG = anteriorPLG.some((iPLG) => iPLG.produtoPLG.idPLG === produtoPLG.idPLG && iPLG.grauPLG === grauPLG);
       if (existePLG) {
-        return anteriorPLG.map((i) =>
-          i.produtoPLG.idPLG === produtoPLG.idPLG && i.grauPLG === grauPLG
-            ? { ...i, quantidadePLG: i.quantidadePLG + quantidadePLG }
-            : i
+        return anteriorPLG.map((iPLG) =>
+          iPLG.produtoPLG.idPLG === produtoPLG.idPLG && iPLG.grauPLG === grauPLG
+            ? { ...iPLG, quantidadePLG: iPLG.quantidadePLG + quantidadePLG }
+            : iPLG
         );
       }
       return [...anteriorPLG, { produtoPLG, grauPLG, quantidadePLG }];
@@ -161,21 +161,21 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
   const alterarQuantidadePLG = (idPLG: string, grauPLG: GrauPLG, deltaPLG: number) => {
     setItensPLG((anteriorPLG) =>
       anteriorPLG
-        .map((i) =>
-          i.produtoPLG.idPLG === idPLG && i.grauPLG === grauPLG
-            ? { ...i, quantidadePLG: i.quantidadePLG + deltaPLG }
-            : i
+        .map((iPLG) =>
+          iPLG.produtoPLG.idPLG === idPLG && iPLG.grauPLG === grauPLG
+            ? { ...iPLG, quantidadePLG: iPLG.quantidadePLG + deltaPLG }
+            : iPLG
         )
-        .filter((i) => i.quantidadePLG > 0)
+        .filter((iPLG) => iPLG.quantidadePLG > 0)
     );
   };
 
   const removerPLG = (idPLG: string, grauPLG: GrauPLG) =>
-    setItensPLG((anteriorPLG) => anteriorPLG.filter((i) => !(i.produtoPLG.idPLG === idPLG && i.grauPLG === grauPLG)));
+    setItensPLG((anteriorPLG) => anteriorPLG.filter((iPLG) => !(iPLG.produtoPLG.idPLG === idPLG && iPLG.grauPLG === grauPLG)));
 
   const alternarFavoritoPLG = (idPLG: string) =>
     setFavoritosPLG((anteriorPLG) =>
-      anteriorPLG.includes(idPLG) ? anteriorPLG.filter((f) => f !== idPLG) : [...anteriorPLG, idPLG]
+      anteriorPLG.includes(idPLG) ? anteriorPLG.filter((fPLG) => fPLG !== idPLG) : [...anteriorPLG, idPLG]
     );
 
   const aplicarCupomPLG = (codigoPLG: string): boolean => {
@@ -186,9 +186,9 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
     return false;
   };
 
-  const quantidadeTotalPLG = itensPLG.reduce((somaPLG, i) => somaPLG + i.quantidadePLG, 0);
+  const quantidadeTotalPLG = itensPLG.reduce((somaPLG, iPLG) => somaPLG + iPLG.quantidadePLG, 0);
   const subtotalPLG = itensPLG.reduce(
-    (somaPLG, i) => somaPLG + i.produtoPLG.precoPLG * fatorGrauPLG[i.grauPLG] * i.quantidadePLG,
+    (somaPLG, iPLG) => somaPLG + iPLG.produtoPLG.precoPLG * fatorGrauPLG[iPLG.grauPLG] * iPLG.quantidadePLG,
     0
   );
   const descontoPLG = cupomPLG ? subtotalPLG * 0.1 : 0;
@@ -221,7 +221,7 @@ export function LojaProviderPLG({ children }: { children: ReactNode }) {
         subtotalPLG, descontoPLG, fretePLG, totalPLG, pedidosPLG, finalizarPedidoPLG, mostrarToastPLG,
       }}
     >
-      {children}
+      {childrenPLG}
       <Animated.View pointerEvents="none" style={[estilosPLG.toastPLG, { opacity: opacidadePLG }]}>
         <Text style={estilosPLG.toastTextoPLG}>{toastPLG}</Text>
       </Animated.View>

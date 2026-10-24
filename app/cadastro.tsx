@@ -5,17 +5,17 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ImagemPLG from '../components/ImagemPLG';
 import CampoPLG from '../components/CampoPLG';
 import BotaoPLG from '../components/BotaoPLG';
 import { useLojaPLG } from '../context/LojaPLG';
-import { corPLG, fontePLG, gradientePLG } from '../constants/temaPLG';
+import { corPLG, fontePLG } from '../constants/temaPLG';
 
 interface ErrosPLG {
   nomePLG?: string;
   emailPLG?: string;
   senhaPLG?: string;
   confirmarPLG?: string;
-  geralPLG?: string;
 }
 
 export default function CadastroPLG() {
@@ -51,26 +51,24 @@ export default function CadastroPLG() {
     <KeyboardAvoidingView style={estilosPLG.telaPLG} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <StatusBar style="light" />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled" bounces={false} showsVerticalScrollIndicator={false}>
-        <LinearGradient colors={gradientePLG.escuroVertPLG} style={[estilosPLG.heroPLG, { paddingTop: insetsPLG.top + 14 }]}>
-          <TouchableOpacity style={estilosPLG.voltarPLG} onPress={() => (roteadorPLG.canGoBack() ? roteadorPLG.back() : roteadorPLG.replace('/login'))} accessibilityLabel="Voltar">
+        <View style={{ height: 230 }}>
+          <ImagemPLG escuroPLG iconePLG="images-outline" legendaPLG="Imagem de destaque do cadastro" estiloPLG={{ width: '100%', height: '100%', borderRadius: 0, borderWidth: 0, backgroundColor: corPLG.marromClaroPLG }} />
+          <LinearGradient colors={['rgba(59,38,30,0)', corPLG.marromPLG]} style={estilosPLG.desvanecerPLG} pointerEvents="none" />
+          <TouchableOpacity style={[estilosPLG.voltarPLG, { top: insetsPLG.top + 12 }]} onPress={() => (roteadorPLG.canGoBack() ? roteadorPLG.back() : roteadorPLG.replace('/login'))} accessibilityLabel="Voltar">
             <Ionicons name="chevron-back" size={22} color={corPLG.brancoPLG} />
           </TouchableOpacity>
-          <Text style={estilosPLG.marcaPLG}>NUMISMÁTICA PLG</Text>
-          <Text style={estilosPLG.heroTituloPLG}>Comece a sua{'\n'}coleção hoje</Text>
-          <Text style={estilosPLG.heroTextoPLG}>Crie sua conta em poucos segundos.</Text>
-        </LinearGradient>
+        </View>
 
-        <View style={estilosPLG.folhaPLG}>
+        <View style={estilosPLG.painelPLG}>
           <Text style={estilosPLG.tituloPLG}>Criar conta</Text>
-          <View style={{ gap: 14, marginTop: 20 }}>
-            <CampoPLG rotuloPLG="Nome completo" iconePLG="person-outline" placeholderPLG="Seu nome" valorPLG={nomePLG} aoMudarPLG={setNomePLG} erroPLG={errosPLG.nomePLG} />
-            <CampoPLG rotuloPLG="E-mail" iconePLG="mail-outline" placeholderPLG="voce@email.com" valorPLG={emailPLG} aoMudarPLG={setEmailPLG} tecladoPLG="email-address" erroPLG={errosPLG.emailPLG} />
-            <CampoPLG rotuloPLG="Senha" iconePLG="lock-closed-outline" placeholderPLG="Mínimo de 6 caracteres" valorPLG={senhaPLG} aoMudarPLG={setSenhaPLG} senhaPLG erroPLG={errosPLG.senhaPLG} />
-            <CampoPLG rotuloPLG="Confirmar senha" iconePLG="shield-checkmark-outline" placeholderPLG="Repita a senha" valorPLG={confirmarPLG} aoMudarPLG={setConfirmarPLG} senhaPLG aoEnviarPLG={criarContaPLG} erroPLG={errosPLG.confirmarPLG} />
+          <Text style={estilosPLG.subtituloPLG}>Comece a sua coleção em poucos segundos.</Text>
+          <View style={{ gap: 14, marginTop: 8 }}>
+            <CampoPLG sobreEscuroPLG iconePLG="person-outline" placeholderPLG="Nome completo" valorPLG={nomePLG} aoMudarPLG={setNomePLG} erroPLG={errosPLG.nomePLG} />
+            <CampoPLG sobreEscuroPLG iconePLG="mail-outline" placeholderPLG="E-mail" valorPLG={emailPLG} aoMudarPLG={setEmailPLG} tecladoPLG="email-address" erroPLG={errosPLG.emailPLG} />
+            <CampoPLG sobreEscuroPLG iconePLG="lock-closed-outline" placeholderPLG="Senha (mínimo 6 caracteres)" valorPLG={senhaPLG} aoMudarPLG={setSenhaPLG} senhaPLG erroPLG={errosPLG.senhaPLG} />
+            <CampoPLG sobreEscuroPLG iconePLG="shield-checkmark-outline" placeholderPLG="Confirmar senha" valorPLG={confirmarPLG} aoMudarPLG={setConfirmarPLG} senhaPLG aoEnviarPLG={criarContaPLG} erroPLG={errosPLG.confirmarPLG} />
           </View>
-
-          <BotaoPLG tituloPLG="Criar conta" aoPressionarPLG={criarContaPLG} estiloPLG={{ marginTop: 24 }} />
-
+          <BotaoPLG tituloPLG="Criar conta" aoPressionarPLG={criarContaPLG} estiloPLG={{ marginTop: 10 }} />
           <View style={estilosPLG.rodapeLinkPLG}>
             <Text style={estilosPLG.rodapeTextoPLG}>Já tem uma conta?</Text>
             <TouchableOpacity onPress={() => roteadorPLG.replace('/login')}>
@@ -84,15 +82,13 @@ export default function CadastroPLG() {
 }
 
 const estilosPLG = StyleSheet.create({
-  telaPLG: { flex: 1, backgroundColor: corPLG.espressoPLG },
-  heroPLG: { paddingHorizontal: 24, paddingBottom: 56 },
-  voltarPLG: { width: 40, height: 40, borderRadius: 14, backgroundColor: 'rgba(255,255,255,0.12)', alignItems: 'center', justifyContent: 'center' },
-  marcaPLG: { fontSize: 12, letterSpacing: 3, fontFamily: fontePLG.semiPLG, color: corPLG.ouroClaroPLG, marginTop: 24 },
-  heroTituloPLG: { fontSize: 32, lineHeight: 40, fontFamily: fontePLG.tituloPLG, color: corPLG.brancoPLG, marginTop: 10 },
-  heroTextoPLG: { fontSize: 14, fontFamily: fontePLG.regularPLG, color: '#DCCFC6', marginTop: 8 },
-  folhaPLG: { flex: 1, marginTop: -32, backgroundColor: corPLG.brancoPLG, borderTopLeftRadius: 34, borderTopRightRadius: 34, paddingHorizontal: 24, paddingTop: 30, paddingBottom: 36 },
-  tituloPLG: { fontSize: 26, fontFamily: fontePLG.tituloPLG, color: corPLG.textoPLG },
-  rodapeLinkPLG: { flexDirection: 'row', justifyContent: 'center', gap: 6, marginTop: 20 },
-  rodapeTextoPLG: { fontSize: 14, fontFamily: fontePLG.regularPLG, color: corPLG.suavePLG },
-  rodapeLinkTextoPLG: { fontSize: 14, fontFamily: fontePLG.semiPLG, color: corPLG.ouroEscuroPLG },
+  telaPLG: { flex: 1, backgroundColor: corPLG.marromPLG },
+  desvanecerPLG: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 100 },
+  voltarPLG: { position: 'absolute', left: 20, width: 42, height: 42, borderRadius: 14, backgroundColor: 'rgba(0,0,0,0.35)', alignItems: 'center', justifyContent: 'center' },
+  painelPLG: { flex: 1, backgroundColor: corPLG.marromPLG, paddingHorizontal: 28, paddingTop: 4, paddingBottom: 36, gap: 14 },
+  tituloPLG: { fontSize: 26, fontFamily: fontePLG.semiPLG, color: corPLG.brancoPLG },
+  subtituloPLG: { fontSize: 14, fontFamily: fontePLG.regularPLG, color: '#D8CCC4', marginTop: -6 },
+  rodapeLinkPLG: { flexDirection: 'row', justifyContent: 'center', gap: 6, marginTop: 4 },
+  rodapeTextoPLG: { fontSize: 14, fontFamily: fontePLG.regularPLG, color: '#D8CCC4' },
+  rodapeLinkTextoPLG: { fontSize: 14, fontFamily: fontePLG.semiPLG, color: corPLG.ouroClaroPLG },
 });

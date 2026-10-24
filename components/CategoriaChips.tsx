@@ -14,12 +14,7 @@ export default function CategoriaChips({ opcoesPLG, selecionadaPLG, aoSelecionar
       {opcoesPLG.map((opcaoPLG) => {
         const ativaPLG = opcaoPLG === selecionadaPLG;
         return (
-          <TouchableOpacity
-            key={opcaoPLG}
-            activeOpacity={0.85}
-            onPress={() => aoSelecionarPLG(opcaoPLG)}
-            style={[estilosPLG.chipPLG, ativaPLG && estilosPLG.chipAtivoPLG]}
-          >
+          <TouchableOpacity key={opcaoPLG} activeOpacity={0.85} onPress={() => aoSelecionarPLG(opcaoPLG)} style={[estilosPLG.chipPLG, ativaPLG && estilosPLG.chipAtivoPLG]}>
             <Text style={[estilosPLG.textoPLG, ativaPLG && estilosPLG.textoAtivoPLG]}>{opcaoPLG}</Text>
           </TouchableOpacity>
         );
@@ -29,9 +24,9 @@ export default function CategoriaChips({ opcoesPLG, selecionadaPLG, aoSelecionar
 }
 
 const estilosPLG = StyleSheet.create({
-  linhaPLG: { paddingHorizontal: 20, paddingVertical: 16, gap: 10 },
-  chipPLG: { paddingHorizontal: 18, paddingVertical: 10, borderRadius: 14, backgroundColor: corPLG.brancoPLG, borderWidth: 1, borderColor: corPLG.bordaPLG },
-  chipAtivoPLG: { backgroundColor: corPLG.marromPLG, borderColor: corPLG.marromPLG },
-  textoPLG: { fontSize: 13, fontFamily: fontePLG.mediaPLG, color: corPLG.textoPLG },
-  textoAtivoPLG: { color: corPLG.ouroClaroPLG, fontFamily: fontePLG.semiPLG },
+  linhaPLG: { paddingHorizontal: 20, paddingVertical: 18, gap: 10 },
+  chipPLG: { paddingHorizontal: 18, paddingVertical: 10, borderRadius: 12 },
+  chipAtivoPLG: { backgroundColor: corPLG.cobrePLG, shadowColor: corPLG.cobrePLG, shadowOpacity: 0.35, shadowRadius: 10, shadowOffset: { width: 0, height: 5 }, elevation: 4 },
+  textoPLG: { fontSize: 14, fontFamily: fontePLG.regularPLG, color: corPLG.textoPLG },
+  textoAtivoPLG: { color: corPLG.brancoPLG, fontFamily: fontePLG.semiPLG },
 });

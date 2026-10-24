@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagemPLG from '../components/ImagemPLG';
 import BotaoPLG from '../components/BotaoPLG';
 import { useLojaPLG } from '../context/LojaPLG';
-import { corPLG, fontePLG, gradientePLG, IconePLG } from '../constants/temaPLG';
+import { corPLG, fontePLG, IconePLG } from '../constants/temaPLG';
 
 interface SlidePLG {
   idPLG: string;
@@ -18,7 +18,7 @@ interface SlidePLG {
 }
 
 const slidesPLG: SlidePLG[] = [
-  { idPLG: '1', tituloPLG: 'Bem-vindo à Numismática PLG', textoPLG: 'A sua loja de moedas e cédulas antigas, agora na palma da mão.', iconePLG: 'storefront-outline', legendaPLG: 'Foto da loja / vitrine' },
+  { idPLG: '1', tituloPLG: 'Hora de colecionar história....', textoPLG: 'Moedas e cédulas antigas entregues na sua porta. Comece a sua coleção agora!', iconePLG: 'storefront-outline', legendaPLG: 'Foto da loja / vitrine' },
   { idPLG: '2', tituloPLG: 'Peças raras e autênticas', textoPLG: 'Cada item é selecionado com cuidado e acompanha certificado de autenticidade.', iconePLG: 'ribbon-outline', legendaPLG: 'Foto de uma peça rara' },
   { idPLG: '3', tituloPLG: 'Do Império ao Real', textoPLG: 'Explore coleções por época: Réis, Cruzeiro, Cruzado e Real.', iconePLG: 'time-outline', legendaPLG: 'Foto das moedas por época' },
   { idPLG: '4', tituloPLG: 'Entrega segura', textoPLG: 'Embalagem protetora e acompanhamento do pedido até a sua casa.', iconePLG: 'cube-outline', legendaPLG: 'Foto da embalagem / entrega' },
@@ -36,6 +36,7 @@ export default function BoasVindasPLG() {
   if (!prontoPLG) return <View style={estilosPLG.telaPLG} />;
   if (usuarioPLG) return <Redirect href="/inicio" />;
 
+  const alturaImagemPLG = alturaPLG * 0.62;
   const ultimoPLG = indicePLG === slidesPLG.length - 1;
 
   const aoTerminarRolagemPLG = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -55,8 +56,6 @@ export default function BoasVindasPLG() {
   return (
     <View style={estilosPLG.telaPLG}>
       <StatusBar style="light" />
-      <LinearGradient colors={gradientePLG.escuroVertPLG} style={StyleSheet.absoluteFill} />
-
       <Animated.ScrollView
         ref={rolagemPLG}
         horizontal
@@ -68,19 +67,20 @@ export default function BoasVindasPLG() {
       >
         {slidesPLG.map((slidePLG, i) => {
           const faixaPLG = [(i - 1) * larguraPLG, i * larguraPLG, (i + 1) * larguraPLG];
-          const deslocamentoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [larguraPLG * 0.3, 0, -larguraPLG * 0.3], extrapolate: 'clamp' });
+          const deslocamentoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [larguraPLG * 0.25, 0, -larguraPLG * 0.25], extrapolate: 'clamp' });
           const opacidadePLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [0, 1, 0], extrapolate: 'clamp' });
           return (
-            <View key={slidePLG.idPLG} style={{ width: larguraPLG, paddingTop: insetsPLG.top + 64 }}>
-              <Animated.View style={{ transform: [{ translateX: deslocamentoPLG }], opacity: opacidadePLG, paddingHorizontal: 28 }}>
+            <View key={slidePLG.idPLG} style={{ width: larguraPLG, height: alturaPLG }}>
+              <View style={{ height: alturaImagemPLG }}>
                 <ImagemPLG
                   escuroPLG
                   iconePLG={slidePLG.iconePLG}
                   legendaPLG={slidePLG.legendaPLG}
-                  estiloPLG={{ width: '100%', height: alturaPLG * 0.42, borderRadius: 32 }}
+                  estiloPLG={{ width: '100%', height: '100%', borderRadius: 0, borderWidth: 0, backgroundColor: corPLG.marromClaroPLG }}
                 />
-              </Animated.View>
-              <Animated.View style={[estilosPLG.textosPLG, { opacity: opacidadePLG }]}>
+                <LinearGradient colors={['rgba(59,38,30,0)', corPLG.marromPLG]} style={estilosPLG.desvanecerPLG} pointerEvents="none" />
+              </View>
+              <Animated.View style={[estilosPLG.textosPLG, { opacity: opacidadePLG, transform: [{ translateX: deslocamentoPLG }] }]}>
                 <Text style={estilosPLG.tituloPLG}>{slidePLG.tituloPLG}</Text>
                 <Text style={estilosPLG.textoPLG}>{slidePLG.textoPLG}</Text>
               </Animated.View>
@@ -89,39 +89,36 @@ export default function BoasVindasPLG() {
         })}
       </Animated.ScrollView>
 
-      <View style={[estilosPLG.topoPLG, { top: insetsPLG.top + 14 }]}>
-        <Text style={estilosPLG.marcaPLG}>NUMISMÁTICA PLG</Text>
-        {!ultimoPLG && (
-          <TouchableOpacity onPress={() => roteadorPLG.push('/login')} accessibilityLabel="Pular apresentação">
-            <Text style={estilosPLG.pularPLG}>Pular</Text>
-          </TouchableOpacity>
-        )}
-      </View>
+      {!ultimoPLG && (
+        <TouchableOpacity style={[estilosPLG.pularPLG, { top: insetsPLG.top + 14 }]} onPress={() => roteadorPLG.push('/login')} accessibilityLabel="Pular apresentação">
+          <Text style={estilosPLG.pularTextoPLG}>Pular</Text>
+        </TouchableOpacity>
+      )}
 
-      <View style={[estilosPLG.rodapePLG, { paddingBottom: Math.max(insetsPLG.bottom, 20) + 8 }]}>
+      <View style={[estilosPLG.rodapePLG, { paddingBottom: Math.max(insetsPLG.bottom, 20) + 6 }]}>
         <View style={estilosPLG.pontosPLG}>
           {slidesPLG.map((slidePLG, i) => {
             const faixaPLG = [(i - 1) * larguraPLG, i * larguraPLG, (i + 1) * larguraPLG];
-            const larguraPontoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [8, 28, 8], extrapolate: 'clamp' });
-            const opacidadePontoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [0.35, 1, 0.35], extrapolate: 'clamp' });
+            const larguraPontoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [8, 30, 8], extrapolate: 'clamp' });
+            const opacidadePontoPLG = posicaoPLG.interpolate({ inputRange: faixaPLG, outputRange: [0.5, 1, 0.5], extrapolate: 'clamp' });
             return <Animated.View key={slidePLG.idPLG} style={[estilosPLG.pontoPLG, { width: larguraPontoPLG, opacity: opacidadePontoPLG }]} />;
           })}
         </View>
-        <BotaoPLG tituloPLG={ultimoPLG ? 'Começar' : 'Próximo'} iconePLG={ultimoPLG ? 'arrow-forward' : undefined} aoPressionarPLG={avancarPLG} />
+        <BotaoPLG tituloPLG={ultimoPLG ? 'Começar' : 'Próximo'} aoPressionarPLG={avancarPLG} />
       </View>
     </View>
   );
 }
 
 const estilosPLG = StyleSheet.create({
-  telaPLG: { flex: 1, backgroundColor: corPLG.espressoPLG },
-  topoPLG: { position: 'absolute', left: 28, right: 28, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  marcaPLG: { fontSize: 12, letterSpacing: 3, fontFamily: fontePLG.semiPLG, color: corPLG.ouroClaroPLG },
-  pularPLG: { fontSize: 14, fontFamily: fontePLG.mediaPLG, color: corPLG.brancoPLG },
-  textosPLG: { paddingHorizontal: 32, marginTop: 32 },
-  tituloPLG: { fontSize: 30, lineHeight: 38, fontFamily: fontePLG.tituloPLG, color: corPLG.brancoPLG, textAlign: 'center' },
-  textoPLG: { fontSize: 15, lineHeight: 23, fontFamily: fontePLG.regularPLG, color: '#DCCFC6', textAlign: 'center', marginTop: 12 },
-  rodapePLG: { position: 'absolute', left: 28, right: 28, bottom: 0, gap: 22 },
+  telaPLG: { flex: 1, backgroundColor: corPLG.marromPLG },
+  desvanecerPLG: { position: 'absolute', left: 0, right: 0, bottom: 0, height: 130 },
+  textosPLG: { paddingHorizontal: 30, marginTop: 8 },
+  tituloPLG: { fontSize: 26, lineHeight: 34, fontFamily: fontePLG.semiPLG, color: corPLG.brancoPLG },
+  textoPLG: { fontSize: 16, lineHeight: 24, fontFamily: fontePLG.regularPLG, color: '#E9E1DC', marginTop: 12 },
+  pularPLG: { position: 'absolute', right: 20, backgroundColor: 'rgba(0,0,0,0.35)', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 20 },
+  pularTextoPLG: { fontSize: 13, fontFamily: fontePLG.mediaPLG, color: corPLG.brancoPLG },
+  rodapePLG: { position: 'absolute', left: 30, right: 30, bottom: 0, gap: 20 },
   pontosPLG: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
-  pontoPLG: { height: 8, borderRadius: 4, backgroundColor: corPLG.ouroClaroPLG },
+  pontoPLG: { height: 8, borderRadius: 4, backgroundColor: corPLG.brancoPLG },
 });

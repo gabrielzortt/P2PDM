@@ -31,7 +31,7 @@ export default function PedidoConfirmadoPLG() {
       <StatusBar style="light" />
       <View style={estilosPLG.centroPLG}>
         <Animated.View style={[estilosPLG.seloPLG, { transform: [{ scale: escalaPLG }] }]}>
-          <Ionicons name="checkmark" size={64} color={corPLG.espressoPLG} />
+          <Ionicons name="checkmark" size={64} color={corPLG.brancoPLG} />
         </Animated.View>
         <Animated.View style={{ opacity: opacidadePLG, alignItems: 'center' }}>
           <Text style={estilosPLG.tituloPLG}>Pedido realizado!</Text>

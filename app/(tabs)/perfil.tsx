@@ -39,7 +39,7 @@ export default function PerfilPLG() {
     <View style={estilosPLG.telaPLG}>
       <StatusBar style="light" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 32 }}>
-        <LinearGradient colors={gradientePLG.escuroVertPLG} style={[estilosPLG.topoPLG, { paddingTop: insetsPLG.top + 24 }]}>
+        <LinearGradient colors={gradientePLG.cinzaPLG} style={[estilosPLG.topoPLG, { paddingTop: insetsPLG.top + 24 }]}>
           <View style={estilosPLG.avatarPLG}>
             <Text style={estilosPLG.avatarTextoPLG}>{(usuarioPLG?.nomePLG ?? 'C').charAt(0).toUpperCase()}</Text>
           </View>
@@ -90,7 +90,7 @@ const estilosPLG = StyleSheet.create({
   telaPLG: { flex: 1, backgroundColor: corPLG.fundoPLG },
   topoPLG: { alignItems: 'center', paddingBottom: 60, borderBottomLeftRadius: 34, borderBottomRightRadius: 34 },
   avatarPLG: { width: 96, height: 96, borderRadius: 32, backgroundColor: corPLG.ouroPLG, alignItems: 'center', justifyContent: 'center', borderWidth: 4, borderColor: 'rgba(255,255,255,0.18)' },
-  avatarTextoPLG: { fontSize: 42, fontFamily: fontePLG.tituloPLG, color: corPLG.espressoPLG },
+  avatarTextoPLG: { fontSize: 42, fontFamily: fontePLG.tituloPLG, color: corPLG.brancoPLG },
   nomePLG: { fontSize: 24, fontFamily: fontePLG.tituloPLG, color: corPLG.brancoPLG, marginTop: 14 },
   emailPLG: { fontSize: 13, fontFamily: fontePLG.regularPLG, color: '#CDBFB5', marginTop: 3 },
   estatisticasPLG: { flexDirection: 'row', marginHorizontal: 20, marginTop: -34, backgroundColor: corPLG.brancoPLG, borderRadius: 22, paddingVertical: 18, ...sombraPLG.fortePLG },

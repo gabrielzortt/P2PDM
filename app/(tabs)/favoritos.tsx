@@ -25,7 +25,7 @@ export default function FavoritosPLG() {
       <ProductList
         produtosPLG={listaPLG}
         aoAbrirPLG={(id) => roteadorPLG.push({ pathname: '/produto/[id]', params: { id } })}
-        vazioPLG={<EstadoVazio iconePLG="heart-outline" tituloPLG="Nenhum favorito ainda" textoPLG="Toque no coração de uma peça para guardá-la aqui." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.push('/explorar')} />}
+        vazioPLG={<EstadoVazio iconePLG="heart-outline" tituloPLG="Nenhum favorito ainda" textoPLG="Toque no coração de uma peça para guardá-la aqui." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.push('/inicio')} />}
       />
     </View>
   );

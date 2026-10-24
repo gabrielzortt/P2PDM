@@ -13,15 +13,14 @@ export default function TabsLayoutPLG() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: corPLG.ouroEscuroPLG,
-        tabBarInactiveTintColor: '#A99C93',
-        tabBarLabelStyle: { fontFamily: fontePLG.mediaPLG, fontSize: 11, marginTop: 2 },
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: corPLG.ouroPLG,
+        tabBarInactiveTintColor: corPLG.inativoPLG,
         tabBarStyle: {
           backgroundColor: corPLG.brancoPLG,
           borderTopWidth: 0,
-          height: 72,
-          paddingTop: 8,
-          paddingBottom: 10,
+          height: 68,
+          paddingTop: 10,
           shadowColor: '#22140E',
           shadowOpacity: 0.1,
           shadowRadius: 18,
@@ -30,19 +29,18 @@ export default function TabsLayoutPLG() {
         },
       }}
     >
-      <Tabs.Screen name="inicio" options={{ title: 'Início', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'home' : 'home-outline'} size={23} color={color} /> }} />
-      <Tabs.Screen name="explorar" options={{ title: 'Explorar', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'compass' : 'compass-outline'} size={24} color={color} /> }} />
-      <Tabs.Screen name="favoritos" options={{ title: 'Favoritos', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'heart' : 'heart-outline'} size={23} color={color} /> }} />
+      <Tabs.Screen name="inicio" options={{ tabBarIcon: ({ color }) => <Ionicons name="home" size={26} color={color} /> }} />
+      <Tabs.Screen name="favoritos" options={{ tabBarIcon: ({ color }) => <Ionicons name="heart" size={26} color={color} /> }} />
       <Tabs.Screen
         name="carrinho"
         options={{
-          title: 'Carrinho',
           tabBarBadge: quantidadeTotalPLG > 0 ? quantidadeTotalPLG : undefined,
-          tabBarBadgeStyle: { backgroundColor: corPLG.ouroPLG, color: corPLG.espressoPLG, fontFamily: fontePLG.semiPLG, fontSize: 10 },
-          tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'bag' : 'bag-outline'} size={23} color={color} />,
+          tabBarBadgeStyle: { backgroundColor: corPLG.ouroPLG, color: corPLG.brancoPLG, fontFamily: fontePLG.semiPLG, fontSize: 10 },
+          tabBarIcon: ({ color }) => <Ionicons name="bag" size={26} color={color} />,
         }}
       />
-      <Tabs.Screen name="perfil" options={{ title: 'Perfil', tabBarIcon: ({ color, focused }) => <Ionicons name={focused ? 'person' : 'person-outline'} size={23} color={color} /> }} />
+      <Tabs.Screen name="notificacoes" options={{ tabBarIcon: ({ color }) => <Ionicons name="notifications" size={26} color={color} /> }} />
+      <Tabs.Screen name="perfil" options={{ tabBarIcon: ({ color }) => <Ionicons name="person" size={26} color={color} /> }} />
     </Tabs>
   );
 }

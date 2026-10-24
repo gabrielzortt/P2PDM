@@ -21,15 +21,15 @@ Também é possível **criar uma conta nova** na tela de cadastro (os dados fica
 | `app/index.tsx` | Boas-vindas em carrossel (deslizável, com indicador de página) |
 | `app/login.tsx` | Login (campos vazios, e-mail incorreto e senha incorreta) |
 | `app/cadastro.tsx` | Criar conta (validação de nome, e-mail, senha e confirmação) |
-| `app/(tabs)/inicio.tsx` | Início: busca, promoção, atalhos, destaques, épocas e mais procurados |
-| `app/(tabs)/explorar.tsx` | Catálogo com busca, filtros e ordenação |
+| `app/(tabs)/inicio.tsx` | Início: localização, busca, filtros, ordenação e grade de produtos |
 | `app/(tabs)/favoritos.tsx` | Peças favoritas |
 | `app/(tabs)/carrinho.tsx` | Carrinho com quantidade, cupom (`COLECAO10`), frete e total |
+| `app/(tabs)/notificacoes.tsx` | Notificações |
 | `app/(tabs)/perfil.tsx` | Perfil e menu da conta |
-| `app/produto/[id].tsx` | Detalhes: galeria, ficha técnica, conservação, quantidade e relacionadas |
+| `app/produto/[id].tsx` | Detalhes: imagem, avaliação, descrição, ficha técnica, conservação e preço |
 | `app/checkout.tsx` | Endereço, pagamento e resumo |
 | `app/pedido-confirmado.tsx` / `app/pedidos.tsx` | Confirmação e histórico de pedidos |
-| `app/notificacoes.tsx`, `app/editar-perfil.tsx`, `app/sobre.tsx` | Telas de apoio |
+| `app/editar-perfil.tsx`, `app/sobre.tsx` | Telas de apoio |
 
 ## Como adicionar as imagens
 Onde aparece **(imagem aqui)** há um espaço reservado. Para colocar uma foto:
@@ -39,9 +39,9 @@ Onde aparece **(imagem aqui)** há um espaço reservado. Para colocar uma foto:
 3. Para os espaços fora dos produtos (carrossel, login, banner, loja), passe `fontePLG={require('...')}` ao componente `ImagemPLG` daquela tela.
 
 ## Estrutura
-- `components/` – `ImagemPLG`, `BotaoPLG`, `CampoPLG`, `ProductCard`, `ProductCardHorizontal`, `ProductList`, `CategoriaChips`, `CabecalhoPLG`, `SeletorQuantidade`, `EstadoVazio`, `ConfirmarModal`
+- `components/` – `ImagemPLG`, `BotaoPLG`, `CampoPLG`, `ProductCard`, `ProductList`, `CategoriaChips`, `CabecalhoPLG`, `SeletorQuantidade`, `EstadoVazio`, `ConfirmarModal`
 - `data/produtosPLG.ts` – servidor local simulado (mock)
 - `context/LojaPLG.tsx` – estado global: usuários, carrinho, favoritos, cupom e pedidos
-- `constants/temaPLG.ts` – cores, fontes (Sora e Playfair Display) e sombras
+- `constants/temaPLG.ts` – cores, fontes (Sora) e sombras
 
 Todas as variáveis, funções e estados levam o sufixo **PLG** (Paulo, Luiz, Gabriel).

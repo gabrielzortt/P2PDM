@@ -22,7 +22,7 @@ export default function PedidosPLG() {
         keyExtractor={(p) => p.idPLG}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<EstadoVazio iconePLG="receipt-outline" tituloPLG="Nenhum pedido ainda" textoPLG="Quando você finalizar uma compra, ela aparecerá aqui." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/explorar')} />}
+        ListEmptyComponent={<EstadoVazio iconePLG="receipt-outline" tituloPLG="Nenhum pedido ainda" textoPLG="Quando você finalizar uma compra, ela aparecerá aqui." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/inicio')} />}
         renderItem={({ item }) => (
           <View style={estilosPLG.cartaoPLG}>
             <View style={estilosPLG.topoPLG}>

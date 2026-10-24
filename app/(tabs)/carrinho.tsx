@@ -77,7 +77,7 @@ export default function CarrinhoPLG() {
         keyExtractor={(i) => `${i.produtoPLG.idPLG}-${i.grauPLG}`}
         contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 24 }}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<EstadoVazio iconePLG="bag-outline" tituloPLG="Seu carrinho está vazio" textoPLG="Que tal conhecer as peças mais procuradas da loja?" botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.push('/explorar')} />}
+        ListEmptyComponent={<EstadoVazio iconePLG="bag-outline" tituloPLG="Seu carrinho está vazio" textoPLG="Que tal conhecer as peças mais procuradas da loja?" botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.push('/inicio')} />}
         ListFooterComponent={itensPLG.length > 0 ? resumoPLG : null}
         renderItem={({ item }) => (
           <View style={estilosPLG.itemPLG}>

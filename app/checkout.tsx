@@ -37,7 +37,7 @@ export default function CheckoutPLG() {
       <View style={estilosPLG.telaPLG}>
         <StatusBar style="dark" />
         <CabecalhoPLG tituloPLG="Finalizar compra" />
-        <EstadoVazio iconePLG="bag-outline" tituloPLG="Carrinho vazio" textoPLG="Adicione peças ao carrinho para finalizar a compra." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/explorar')} />
+        <EstadoVazio iconePLG="bag-outline" tituloPLG="Carrinho vazio" textoPLG="Adicione peças ao carrinho para finalizar a compra." botaoPLG="Explorar peças" aoPressionarPLG={() => roteadorPLG.replace('/inicio')} />
       </View>
     );
   }
@@ -139,7 +139,7 @@ const estilosPLG = StyleSheet.create({
   cartaoPLG: { backgroundColor: corPLG.brancoPLG, borderRadius: 24, padding: 18, gap: 14, ...sombraPLG.suavePLG },
   secaoTopoPLG: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   numeroPLG: { width: 28, height: 28, borderRadius: 10, backgroundColor: corPLG.ouroPLG, alignItems: 'center', justifyContent: 'center' },
-  numeroTextoPLG: { fontSize: 13, fontFamily: fontePLG.semiPLG, color: corPLG.espressoPLG },
+  numeroTextoPLG: { fontSize: 13, fontFamily: fontePLG.semiPLG, color: corPLG.brancoPLG },
   secaoTituloPLG: { fontSize: 18, fontFamily: fontePLG.tituloPLG, color: corPLG.textoPLG },
   paraPLG: { fontSize: 13, fontFamily: fontePLG.regularPLG, color: corPLG.suavePLG, marginTop: -4 },
   pagamentoPLG: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12, borderRadius: 16, borderWidth: 1.5, borderColor: corPLG.bordaPLG },

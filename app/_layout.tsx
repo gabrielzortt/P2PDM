@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts, Sora_400Regular, Sora_500Medium, Sora_600SemiBold } from '@expo-google-fonts/sora';
-import { PlayfairDisplay_600SemiBold, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
 import { LojaProviderPLG } from '../context/LojaPLG';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontesCarregadasPLG] = useFonts({
-    Sora_400Regular, Sora_500Medium, Sora_600SemiBold, PlayfairDisplay_600SemiBold, PlayfairDisplay_700Bold,
+    Sora_400Regular, Sora_500Medium, Sora_600SemiBold,
   });
 
   useEffect(() => {
@@ -29,7 +28,6 @@ export default function RootLayout() {
         <Stack.Screen name="checkout" />
         <Stack.Screen name="pedido-confirmado" options={{ animation: 'fade', gestureEnabled: false }} />
         <Stack.Screen name="pedidos" />
-        <Stack.Screen name="notificacoes" />
         <Stack.Screen name="editar-perfil" />
         <Stack.Screen name="sobre" />
       </Stack>
